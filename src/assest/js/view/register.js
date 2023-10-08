@@ -1,7 +1,5 @@
-// import logout from './component/logout.js';
-// import sidebar from './component/sidebar.js';
-// import userAcct from './component/userAccount.js';
-// import { createData } from '../Modal/registerModal.js';
+import { writeUserData } from "../modal/EmployeeService";
+
 
 function init() {
 //   const logoutEvent = document.querySelector('.logout');
@@ -35,6 +33,35 @@ function init() {
 //   const userPersonIcon = document.querySelector('.bi-person');
 //   userAcct.showModelFunction(userPersonIcon, dropDown);
 
+     const customDateInput = document.querySelector('.dob');
+        const hiddenDateInput = document.querySelector('.hidden-date');
+
+        // Attach an event listener to the custom date input
+        customDateInput.addEventListener('input', function () {
+            // Parse and format the date as needed
+            const enteredDate = parseCustomDate(this.value);
+            
+            // Update the hidden input with a standard date format (e.g., ISO 8601)
+            hiddenDateInput.value = enteredDate;
+        });
+
+
+function parseCustomDate(dateString) {
+  // Implement your custom date parsing logic here
+  // Example: parse 'MM/DD/YYYY' format
+  const parts = dateString.split('/');
+  if (parts.length === 3) {
+      const month = parseInt(parts[0], 10);
+      const day = parseInt(parts[1], 10);
+      const year = parseInt(parts[2], 10);
+      if (!isNaN(month) && !isNaN(day) && !isNaN(year)) {
+          // Construct a standard date format (e.g., ISO 8601)
+          return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+      }
+  }
+  return '';
+}
+
   // //////////////////////////////////////////////
   //form validation
   const validateForm = () => {
@@ -45,12 +72,20 @@ function init() {
     const gender = genderParent.querySelectorAll('.gender');
     const age = document.querySelector('.age');
     const email = document.querySelector('.email');
+    const address = document.querySelector(".address");
+    const city = document.querySelector(".city");
+    const postCode = document.querySelector(".postCode");
     const stateOfOrigin = document.querySelector('.stateOfOrigin');
+    const maritalStatue = document.querySelector(".marital-status");
+    const emergencyContact = document.querySelector(".emergency-contact-name");
     const password = document.querySelector('.password');
     const confirmPassword = document.querySelector('.confirmPassword');
+    const position = document.querySelector(".position");
+    const startDate = document.querySelector(".start-date")
 
+   
     //prettier-ignore
-    let nameErr = gendersErr = ageErr = emailErr = countryErr = passwordErr = confirmPasswordErr = true;
+    let nameErr = true;
 
     if (fname.value.trim() === '') {
       errorMessage(fname, 'is required');
@@ -92,44 +127,43 @@ function init() {
       }
     }
     if (gender[0].checked === false && gender[1].checked === false) {
-      errorMessage(genderParent, 'is required');
-      gendersErr = false;
+      nameErrr = false;
     } else {
       successMessage(genderParent);
-      genderErr = false;
+     nameErr = false;
     }
     if (age.value === '') {
       errorMessage(age, 'is required');
-      ageErr = false;
+   nameErr = false;
     } else {
       const regrex = /^[0-9]+$/;
       if (!regrex.test(age.value.trim())) {
         errorMessage(age, 'is not valid');
-        ageErr = false;
+     nameErr = false;
       } else if (Number(age.value) < 18) {
         errorMessage(age, 'should not be less than 18');
-        ageErr = false;
+     nameErr = false;
       } else if (Number(age.value) > 40) {
         errorMessage(age, 'should not be greater than 40');
-        ageErr = false;
+     nameErr = false;
       } else {
         successMessage(age);
-        ageErr = true;
+     nameErr = true;
       }
     }
 
     if (email.value.trim() === '') {
       errorMessage(email, 'is required');
-      emailErr = false;
+      nameErr = false;
     } else {
       const regrex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
       if (!regrex.test(email.value.trim())) {
         errorMessage(email, 'is not valid');
-        emailErr = false;
+        nameErr = false;
       } else {
         successMessage(email);
-        emailErr = true;
+        nameErr = true;
       }
     }
 
@@ -137,42 +171,146 @@ function init() {
       errorMessage(stateOfOrigin, 'is required');
       countryErr = false;
     } else {
-      successMessage(stateOfOrigin);
-      countryErr = true;
+      nameErr = true;
     }
 
     if (password.value.trim() === '') {
       errorMessage(password, 'is required');
-      passwordErr = false;
+     nameErr = false;
     } else {
       const regex = new RegExp('hicad+[0-9]{3,3}');
       if (!regex.test(password.value.trim())) {
         errorMessage(password, 'is not valid');
-        passwordErr = false;
+       nameErr = false;
       } else {
         successMessage(password);
-        passwordErr = true;
+       nameErr = true;
       }
     }
 
     if (confirmPassword.value.trim() === '') {
       errorMessage(confirmPassword, 'is required');
-      confirmPasswordErr = false;
+     nameErr = false;
     } else if (confirmPassword.value.trim() != password.value.trim()) {
       errorMessage(confirmPassword, 'do not match');
-      confirmPasswordErr = false;
+     nameErr = false;
     } else {
       successMessage(confirmPassword);
-      confirmPasswordErr = true;
+     nameErr = true;
     }
+    if (city.value.trim() === '') {
+      errorMessage(city, 'is required');
+      nameErr = false;
+    }
+    else {
+      const regrex = /^[a-zA-Z]+$/;
+      if (!regrex.test(city.value.trim())) {
+        errorMessage(city, 'is not valid');
+        nameErr = false;
+      } else {
+        successMessage(city);
+        nameErr = true;
+      }
+    }
+    if (postCode.value.trim() === '') {
+      errorMessage(postCode, 'is required');
+      nameErr = false;
+    }
+    else {
+      const regrex = /^[a-zA-Z]+$/;
+      if (!regrex.test(postCode.value.trim())) {
+        errorMessage(postCode, 'is not valid');
+        nameErr = false;
+      } else {
+        successMessage(postCode);
+        nameErr = true;
+      }
+    }
+    if (address.value.trim() === '') {
+      errorMessage(address, 'is required');
+      nameErr = false;
+    }
+    else {
+      const regrex = /^[a-zA-Z]+$/;
+      if (!regrex.test(address.value.trim())) {
+        errorMessage(address, 'is not valid');
+        nameErr = false;
+      }
+      if( address.value.length !== 10 && address.value.length !== 30 ){
+        errorMessage(address, 'address should be atleast 10 character');
+        nameErr = false;
+      } else {
+        successMessage(address);
+        nameErr = true;
+      }
+    }
+    if (maritalStatue.value.trim() === '') {
+      errorMessage(maritalStatue, 'is required');
+      nameErr = false;
+    }
+    else {
+        successMessage(maritalStatue);
+        nameErr = true;
+      }
+
+      if (emergencyContact.value.trim() === '') {
+        errorMessage(emergencyContact, 'is required');
+        nameErr = false;
+      }
+      else {
+        const regrex = /^[a-zA-Z]+$/;
+        if (!regrex.test(emergencyContact.value.trim())) {
+          errorMessage(emergencyContact, 'is not valid');
+          nameErr = false;
+        } else {
+          successMessage(emergencyContact);
+          nameErr = true;
+        }
+      }
+      if (postCode.value.trim() === '') {
+        errorMessage(postCode, 'is required');
+        nameErr = false;
+      }
+      else {
+        const regrex = /^[a-zA-Z]+$/;
+        if (!regrex.test(postCode.value.trim())) {
+          errorMessage(postCode, 'is not valid');
+          nameErr = false;
+        } else {
+          successMessage(postCode);
+          nameErr = true;
+        }
+      }
+      
+
+      if (position.value.trim() === '') {
+        errorMessage(position, 'is required');
+        nameErr = false;
+      }
+      else {
+          successMessage(position);
+          nameErr = true;
+        }
+      
+      if (startDate.value === '') {
+        errorMessage(startDate, 'is required');
+        nameErr = false;
+      }
+      else {
+        successMessage(startDate);
+        nameErr = true;
+      }
+     
+    
     //prettier-ignore
-    if((nameErr  && gendersErr && ageErr && emailErr && countryErr && passwordErr && confirmPasswordErr) === true ){
+    if(nameErr === true ){
       return true;
     }
     else{
       return false;
     }
   };
+ 
 
   const errorMessage = (input, message) => {
     const inputParent = input.parentElement;
@@ -251,6 +389,15 @@ function init() {
     const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
     const password = formElement.querySelector('.password').value;
     const confirmPassword = formElement.querySelector('.confirmPassword').value;
+    const address = formElement.querySelector(".address");
+    const city = formElement.querySelector(".city");
+    const postCode = formElement.querySelector(".postCode");
+    const maritalStatue = formElement.querySelector(".marital-status");
+    const emergencyContact = formElement.querySelector(".emergency-contact-name");
+    const position = formElement.querySelector(".position");
+    const startDate = formElement.querySelector(".start-date")
+
+
     //prettier-ignore
     const data = {
      firstName : firstName,
@@ -261,9 +408,16 @@ function init() {
      email : email,
      stateOfOrigin:stateOfOrigin,
      password : password,
-     confirmPassword:confirmPassword
+     confirmPassword:confirmPassword,
+     address:address,
+     city:city,
+     postCode : postCode,
+     maritalStatue: maritalStatue,
+     emergencyContact: emergencyContact,
+     position: position,
+     startDate:startDate
     }
-    createData(data);
+    writeUserData(data);
   };
 }
 init();

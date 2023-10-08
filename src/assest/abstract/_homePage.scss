@@ -2,6 +2,7 @@
 @import '/node_modules/bootstrap/scss/bootstrap.scss';
 html{
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 .home-content{
     background-image: url('/image/homebg.jpg');

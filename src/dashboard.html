@@ -214,7 +214,7 @@
          </div>
          <div class="col">
            <label for="age"
-             >Age
+             >Date of Birth
              <svg
                xmlns="http://www.w3.org/2000/svg"
                width="5"
@@ -227,7 +227,9 @@
                  d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
                /></svg
            ></label>
-           <input type="text" name="Age" class="age"  placeholder="Enter Age"/>
+        
+           <input type="text" class="dob" placeholder="MM/DD/YYYY"/>
+           <input type="hidden" name="hidden-date" class="hidden-date">
 
            <small></small>
          </div>
@@ -388,9 +390,9 @@
                 /></svg
             ></label>
             <select class="marital-status">
-              <option selected value="">select..</option>
-              <option value="single">single</option>
-              <option value="married">married</option>
+              <option selected value="">Select..</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
             </select>
             <small></small>
           </div>
@@ -577,7 +579,8 @@
               d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
             /></svg
         >
-          <input type="date">
+          <input type="date" class="start-date">
+          <small></small>
           </div>
          </div>
        <button type="submit" class="reg-btn">Register</button>
