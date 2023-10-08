@@ -1,0 +1,119 @@
+@import '/src/assest/abstract/_base.scss';
+@import '/node_modules/bootstrap/scss/bootstrap.scss';
+html{
+    overflow-x: hidden;
+}
+.home-content{
+    background-image: url('/image/homebg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    .modal{
+        display: block;
+        position:absolute;
+        top:60%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        padding: 10px;
+        .modal-header{
+            display: inline-block;
+            h3{
+                font-size:1.3rem;
+                text-align: center;
+                font-weight: 500;
+            }
+        }
+        .modal-body{
+            form{
+             input{
+                border: 1px solid #ccc;
+                padding:10px 15px;
+                border-radius: 4px;
+                outline:none;
+                margin:10px 0px;
+                width:100%;
+                display: flex;
+                flex-direction: column;
+             
+             }
+            .input{
+                position: relative;
+                span svg{
+                    position:absolute;
+                    bottom:25px;
+                    left:85%;
+                    color:#4444;
+                    cursor: pointer;
+                }
+               
+            }
+            .hidden{
+                display: none;
+            }
+             input::placeholder{
+                text-transform: capitalize;
+                font-size:.8rem;
+                
+             }
+             button{
+                width:100%;
+                padding:15px;
+                background-color: rgb(2, 2, 126);
+                font-size:1rem;
+                margin:10px 0px;
+                border:none;
+                color:white;
+                border-radius: 4px;
+                text-transform: capitalize;
+
+             }
+                small{
+                    font-size:.8rem;
+                    color: red;
+                   
+                }
+                a{
+                    font-size:.9rem;
+                    text-decoration: none;
+                    margin:10px 0px;
+                    display: flex;
+                    justify-content: center;
+                    
+
+                }
+            }
+            
+        }
+    }
+}
+.notification-model{
+    background-color: rgb(253, 3, 3);
+    border-radius: 2px;
+    width: 230px;
+    padding:10px 5px 2px 5px;
+    z-index: inherit;
+    position: absolute;
+    top:20px;
+    right:-300px;
+    transition: all 0.5s ease;
+    margin-right:30px;
+    p{
+        color:white;
+        font-size:0.9rem;
+        font-weight:500;
+        padding:5px;
+        text-align: center;
+    }
+}
+.overlay{
+    position: absolute;
+    top:0;
+    left:0;
+    background-color: rgb(0,0,0,0.8);
+    z-index: 1000;
+    width:100%;
+    height:100%;
+}

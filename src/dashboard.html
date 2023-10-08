@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/assest/css/dashboard.css">
+    <script type="module" src="/src/assest/js/view/register.js"></script>
+    <title>hicad-dashboard</title>
+</head>
+<body>
+    <section class="menu">
+     <h3>Hicad Enterprise</h3>
+     <nav> 
+        <ul>
+            <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-pie-chart-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"
+                  /></svg
+                >Dashboard
+              </li>
+            <li><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-people"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"
+                /></svg>Employee</li>
+                
+                <div class="dropdown">
+                    <div class="dropdown-content">
+                        <ul>
+                            <li> New employee</li>
+                            <li>View employee</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            <li> <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-people"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"
+                /></svg> Department</li>
+
+                
+            <li> <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-people"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"
+                /></svg> Staff Leave</li>
+        </ul>
+     </nav>
+    </section>
+<section class="interface">
+    <div class="navigation">
+      <div class="nav-content">
+        <div class="search">
+          <input type="text" placeholder="search..">
+        </div>
+        <div class="info">
+          <img src="/image/IMG-20231004-WA0003.jpg" alt="admin-logo">
+          <h4>Admin@gmail.com</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div>
+       
+      </div>
+        
+    </div>
+    <div class="employee-content">
+       <h3>Register Employee</h3>
+       <form 
+       action=""
+       autocomplete="off"
+       method="post"
+       class="registrationForm"
+     >
+     <h4>Personal information</h4>
+       <div class="row">
+         <div class="col">
+           <label for="surname">
+             First name
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               width="5"
+               height="5"
+               fill="currentColor"
+               class="bi bi-asterisk"
+               viewBox="0 0 16 16"
+             >
+               <path
+                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+               />
+             </svg>
+           </label>
+           <input
+             type="text"
+             name="First name"
+             class="first-name"
+             maxlength="20"
+             placeholder="First Name"
+           />
+           <small></small>
+         </div>
+
+         <div class="col">
+           <label for="Lastname">
+             Last name
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               width="5"
+               height="5"
+               fill="currentColor"
+               class="bi bi-asterisk"
+               viewBox="0 0 16 16"
+             >
+               <path
+                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+               />
+             </svg>
+           </label>
+           <input
+             type="text"
+             name="Last name"
+             class="last-name"
+             maxlength="20"
+             placeholder="Last Name"
+           />
+           <small></small>
+         </div>
+         <div class="col">
+           <label for="Middlename">
+             Middle name
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               width="5"
+               height="5"
+               fill="currentColor"
+               class="bi bi-asterisk"
+               viewBox="0 0 16 16"
+             >
+               <path
+                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+               /></svg
+           ></label>
+           <input
+             type="text"
+             name="Middle name"
+             class="middle-name"
+             maxlength="20"
+             placeholder="Middle Name"
+           />
+           <small></small>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="col">
+           <label for="gender"
+             >Gender
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               width="5"
+               height="5"
+               fill="currentColor"
+               class="bi bi-asterisk"
+               viewBox="0 0 16 16"
+             >
+               <path
+                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+               />
+             </svg>
+           </label>
+           <div class="gender-content" name="gender">
+             <input
+               type="radio"
+               name="gender"
+               value="male"
+               class="gender"
+               
+             /><label for="male"> male</label>
+             <input
+               type="radio"
+               name="gender"
+               value="female"
+               class="gender"
+             /><label for="female">female</label>
+           </div>
+           <small></small>
+         </div>
+         <div class="col">
+           <label for="age"
+             >Age
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               width="5"
+               height="5"
+               fill="currentColor"
+               class="bi bi-asterisk"
+               viewBox="0 0 16 16"
+             >
+               <path
+                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+               /></svg
+           ></label>
+           <input type="text" name="Age" class="age"  placeholder="Enter Age"/>
+
+           <small></small>
+         </div>
+
+         <div class="col">
+           <label for="email"
+             >Email address
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               width="5"
+               height="5"
+               fill="currentColor"
+               class="bi bi-asterisk"
+               viewBox="0 0 16 16"
+             >
+               <path
+                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+               /></svg
+           ></label>
+           <input type="email" class="email" name="Email address"  placeholder="Email Address" />
+
+           <small></small>
+         </div>
+       </div>
+       <div class="row">
+        <div class="col">
+          <label for="address"
+            >Address
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="5"
+              height="5"
+              fill="currentColor"
+              class="bi bi-asterisk"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+              /></svg
+          ></label>
+          <input type="text" class="address" name="Address"  placeholder="Address"  maxlength="300" minlength="10"/>
+
+          <small></small>
+        </div>
+        <div class="col">
+          <label for="city"
+            >City
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="5"
+              height="5"
+              fill="currentColor"
+              class="bi bi-asterisk"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+              /></svg
+          ></label>
+          <input type="text" class="city" name="City"  placeholder="City" minlength="5"/>
+
+          <small></small>
+        </div>
+
+         <div class="col">
+           <label for="state"
+             >State of Origin
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               width="5"
+               height="5"
+               fill="currentColor"
+               class="bi bi-asterisk"
+               viewBox="0 0 16 16"
+             >
+               <path
+                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+               /></svg
+           ></label>
+           <select name="state of origin" class="stateOfOrigin">
+             <option selected>Choose...</option>
+             <option value="Abia">Abia</option>
+             <option value="Adamawa">Adamawa</option>
+             <option value="Akwa ibom">Akwa ibom</option>
+             <option value="Anambra">Anambra</option>
+             <option value="Bauchi">Bauchi</option>
+             <option value="Bayelsa">Bayelsa</option>
+             <option value="Benue">Benue</option>
+             <option value="Borno">Borno</option>
+             <option value="Cross river">cross river</option>
+             <option value="Delta">Delta</option>
+             <option value="Ebonyi">Ebonyi</option>
+             <option value="Edo">Edo</option>
+             <option value="Ekiti">Ekiti</option>
+             <option value="Enugu">Enugu</option>
+             <option value="Gombe">Gombe</option>
+             <option value="Imo">Imo</option>
+             <option value="Jigawa">Jigawa</option>
+             <option value="Kaduna">Kaduna</option>
+             <option value="Kano">Kano</option>
+             <option value="Katstina">Katstina</option>
+             <option value="Kebbi">Kebbi</option>
+             <option value="Kogi">Kogi</option>
+             <option value="Kwara">Kwara</option>
+             <option value="Lagos">Lagos</option>
+             <option value="Nasarawa">Nasarawa</option>
+             <option value="Niger">Niger</option>
+             <option value="Ogun">Ogun</option>
+             <option value="Ondo">Ondo</option>
+             <option value="Osun">Osun</option>
+             <option value="Oyo">Oyo</option>
+             <option value="Plateau">Plateau</option>
+             <option value="River">River</option>
+             <option value="Sokoto">Sokoto</option>
+             <option value="Taraba">Taraba</option>
+             <option value="Yobe">Yobe</option>
+             <option value="Zamfara">Zamfara</option>
+             <option value="Fct">Fct</option>
+           </select>
+
+           <small></small>
+         </div>
+         </div>
+         <div class="row">
+          <div class="col">
+            <label for="postCode"
+              >Post Code
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="5"
+                height="5"
+                fill="currentColor"
+                class="bi bi-asterisk"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                /></svg
+            ></label>
+            <input type="text" class="postCode" name="Post-code"  placeholder="Post Code" />
+ 
+            <small></small>
+          </div>
+
+          <div class="col password-input">
+            <label for="password"
+              >Password
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="5"
+                height="5"
+                fill="currentColor"
+                class="bi bi-asterisk"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                /></svg
+            ></label>
+            <input
+              type="password"
+              name="Password"
+              class="password"
+              autocomplete="off" placeholder="Password"
+            />
+ 
+            <small></small>
+            <div class="eye-icon">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                  class="bi bi-eye-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                  <path
+                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                  class="bi bi-eye-slash-fill hidden"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"
+                  />
+                  <path
+                    d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="col password-input">
+            <label for="confirmPassword"
+              >Confirm password
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="5"
+                height="5"
+                fill="currentColor"
+                class="bi bi-asterisk"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                /></svg
+            ></label>
+            <input
+              type="password"
+              name="Confirm password"
+              class="confirmPassword"
+              autocomplete="off" placeholder="Confirm Password"
+            />
+ 
+            <small></small>
+            <div class="confirmPassword-eye-icon">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                  class="bi bi-eye-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                  <path
+                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                  class="bi bi-eye-slash-fill hidden"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"
+                  />
+                  <path
+                    d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"
+                  />
+                </svg>
+              </span>
+            </div>
+         </div>
+         </div>
+       <button type="submit" class="reg-btn">Register</button>
+     </form>
+     
+     <footer>
+        <p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-c-circle"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"
+            />
+          </svg>
+          Hicad-Enterprise 2023
+        </p>
+      </footer>
+    </div>
+    <div class="loader-spinner">
+    </div>
+</section>
+</body>
+</html>

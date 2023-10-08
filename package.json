@@ -1,0 +1,24 @@
+{
+  "name": "office-enterprise-system",
+  "version": "1.0.0",
+  "description": "",
+  "source": "app.html",
+  "scripts": {
+    "start": "parcel src/app.html"
+  },
+  "author": "EbukaCoder",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.3",
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.11.1",
+    "core-js": "^3.33.0",
+    "firebase": "^10.4.0",
+    "loadash": "^1.0.0",
+    "sweetalert2": "^11.7.32"
+  }
+}
