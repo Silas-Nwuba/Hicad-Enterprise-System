@@ -28,40 +28,6 @@ function init() {
 //   );
 //   sidebar.closeSidebarFunction(sidebarBackdrop, sidebarElement);
 
-//   /////////////////////////////////////////////////////
-//   //user model
-//   const userPersonIcon = document.querySelector('.bi-person');
-//   userAcct.showModelFunction(userPersonIcon, dropDown);
-
-     const customDateInput = document.querySelector('.dob');
-        const hiddenDateInput = document.querySelector('.hidden-date');
-
-        // Attach an event listener to the custom date input
-        customDateInput.addEventListener('input', function () {
-            // Parse and format the date as needed
-            const enteredDate = parseCustomDate(this.value);
-            
-            // Update the hidden input with a standard date format (e.g., ISO 8601)
-            hiddenDateInput.value = enteredDate;
-        });
-
-
-function parseCustomDate(dateString) {
-  // Implement your custom date parsing logic here
-  // Example: parse 'MM/DD/YYYY' format
-  const parts = dateString.split('/');
-  if (parts.length === 3) {
-      const month = parseInt(parts[0], 10);
-      const day = parseInt(parts[1], 10);
-      const year = parseInt(parts[2], 10);
-      if (!isNaN(month) && !isNaN(day) && !isNaN(year)) {
-          // Construct a standard date format (e.g., ISO 8601)
-          return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-      }
-  }
-  return '';
-}
-
   // //////////////////////////////////////////////
   //form validation
   const validateForm = () => {
@@ -70,7 +36,7 @@ function parseCustomDate(dateString) {
     const middleName = document.querySelector('.middle-name');
     const genderParent = document.querySelector('.gender-content');
     const gender = genderParent.querySelectorAll('.gender');
-    const age = document.querySelector('.age');
+    const Dob = document.querySelector('.dob');
     const email = document.querySelector('.email');
     const address = document.querySelector(".address");
     const city = document.querySelector(".city");
@@ -82,6 +48,8 @@ function parseCustomDate(dateString) {
     const confirmPassword = document.querySelector('.confirmPassword');
     const position = document.querySelector(".position");
     const startDate = document.querySelector(".start-date")
+    
+    
 
    
     //prettier-ignore
@@ -127,31 +95,36 @@ function parseCustomDate(dateString) {
       }
     }
     if (gender[0].checked === false && gender[1].checked === false) {
-      nameErrr = false;
+      errorMessage(genderParent, 'is required');
+      nameErr = false;
     } else {
       successMessage(genderParent);
      nameErr = false;
     }
-    if (age.value === '') {
-      errorMessage(age, 'is required');
-   nameErr = false;
-    } else {
-      const regrex = /^[0-9]+$/;
-      if (!regrex.test(age.value.trim())) {
-        errorMessage(age, 'is not valid');
-     nameErr = false;
-      } else if (Number(age.value) < 18) {
-        errorMessage(age, 'should not be less than 18');
-     nameErr = false;
-      } else if (Number(age.value) > 40) {
-        errorMessage(age, 'should not be greater than 40');
-     nameErr = false;
-      } else {
-        successMessage(age);
-     nameErr = true;
-      }
+   
+ 
+    //Get the date from the TextBox.
+    const  regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+    const parts = Dob.value.split("/");
+    const dtDOB = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+    const dtCurrent = new Date();
+    //Check whether valid dd/MM/yyyy Date Format.
+    if(!regex.test(Dob.value.trim())){
+      errorMessage(Dob,"Enter date in dd/MM/yyyy format ONLY.")
+      nameErr = false;
     }
-
+    else if(dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
+      errorMessage(Dob,"Eligibility 18 years ONLY.");
+      nameErr =  false;
+    }
+    // else if(dtCurrent.getMonth() < dtDOB.getMonth()){
+    //   errorMessage(Dob,"is not yet up to 18.");
+    //   nameErr =  false;
+    // }
+    else {
+      successMessage(Dob)
+      nameErr = true;
+    }
     if (email.value.trim() === '') {
       errorMessage(email, 'is required');
       nameErr = false;
@@ -171,6 +144,7 @@ function parseCustomDate(dateString) {
       errorMessage(stateOfOrigin, 'is required');
       countryErr = false;
     } else {
+      successMessage(stateOfOrigin);
       nameErr = true;
     }
 
@@ -178,7 +152,7 @@ function parseCustomDate(dateString) {
       errorMessage(password, 'is required');
      nameErr = false;
     } else {
-      const regex = new RegExp('hicad+[0-9]{3,3}');
+      const regex = new RegExp(`${fname.value}+${parts[1]}+${parts[2]}`);
       if (!regex.test(password.value.trim())) {
         errorMessage(password, 'is not valid');
        nameErr = false;
@@ -217,15 +191,10 @@ function parseCustomDate(dateString) {
       nameErr = false;
     }
     else {
-      const regrex = /^[a-zA-Z]+$/;
-      if (!regrex.test(postCode.value.trim())) {
-        errorMessage(postCode, 'is not valid');
-        nameErr = false;
-      } else {
-        successMessage(postCode);
-        nameErr = true;
-      }
+      successMessage(postCode);
+      nameErr = true;
     }
+  
     if (address.value.trim() === '') {
       errorMessage(address, 'is required');
       nameErr = false;
@@ -236,7 +205,7 @@ function parseCustomDate(dateString) {
         errorMessage(address, 'is not valid');
         nameErr = false;
       }
-      if( address.value.length !== 10 && address.value.length !== 30 ){
+      if( address.value.length < 10){
         errorMessage(address, 'address should be atleast 10 character');
         nameErr = false;
       } else {
@@ -267,22 +236,7 @@ function parseCustomDate(dateString) {
           nameErr = true;
         }
       }
-      if (postCode.value.trim() === '') {
-        errorMessage(postCode, 'is required');
-        nameErr = false;
-      }
-      else {
-        const regrex = /^[a-zA-Z]+$/;
-        if (!regrex.test(postCode.value.trim())) {
-          errorMessage(postCode, 'is not valid');
-          nameErr = false;
-        } else {
-          successMessage(postCode);
-          nameErr = true;
-        }
-      }
-      
-
+    
       if (position.value.trim() === '') {
         errorMessage(position, 'is required');
         nameErr = false;
@@ -349,7 +303,6 @@ function parseCustomDate(dateString) {
   };
   const showTextConfirmPassword = () => {
     const eyeIcon = document.querySelector('.confirmPassword-eye-icon');
-
     //////////////////////////////////////////////////////
     //changing password type to text type
     eyeIcon.addEventListener('click', (e) => {
@@ -378,13 +331,12 @@ function parseCustomDate(dateString) {
       sendDataToFirebase(form);
     }
   });
-
   const sendDataToFirebase = (formElement) => {
     const firstName = formElement.querySelector('.first-name').value;
     const lastName = formElement.querySelector('.last-name').value;
     const middleName = formElement.querySelector('.middle-name').value;
     const gender = formElement.querySelector('.gender:checked').value;
-    const age = formElement.querySelector('.age').value;
+    const Dob = formElement.querySelector('.dob').value;
     const email = formElement.querySelector('.email').value;
     const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
     const password = formElement.querySelector('.password').value;
@@ -404,7 +356,7 @@ function parseCustomDate(dateString) {
      lastName : lastName,
      middleName : middleName,
      gender : gender,
-     age:age,
+     Dob:Dob,
      email : email,
      stateOfOrigin:stateOfOrigin,
      password : password,
@@ -415,7 +367,8 @@ function parseCustomDate(dateString) {
      maritalStatue: maritalStatue,
      emergencyContact: emergencyContact,
      position: position,
-     startDate:startDate
+     startDate:startDate,
+   
     }
     writeUserData(data);
   };

@@ -1,5 +1,5 @@
 @import '/src/assest/abstract/_base.scss';
-
+@import '/node_modules/sweetalert2/src/sweetalert2.scss';
 body{
     background-color: #cccc;
     display: flex;
@@ -284,6 +284,13 @@ html{
             }
           }
     }
+    .swal2-popup .swal2-styled:focus {
+      box-shadow: none !important;
+    }
+    .swal2-backdrop-show {
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.7) !important;
+    }
     // sending http request spinner
     .loader-spinner {
       display: inline-block;
@@ -296,7 +303,6 @@ html{
       z-index: 20000;
       display: none;
     }
-    
     .loader-spinner div {
       position: absolute;
       top: 33px;
