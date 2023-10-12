@@ -1,33 +1,17 @@
-import { writeUserData } from "../modal/EmployeeService";
-
+import { writeUserData } from '../modal/EmployeeService';
 
 function init() {
-//   const logoutEvent = document.querySelector('.logout');
-//   const element = document.querySelector('.logout-modal');
-//   const modal = document.querySelector('.modal').className;
-//   const backdrop = document.querySelector('.backdrop').className;
-//   const closeEventClass = document.querySelector('.close').className;
-//   const declineBtn = document.querySelector('.decline');
-//   const confirmBtn = document.querySelector('.confirm');
-//   const dropDown = document.querySelector('.dropdown-content');
-
-//   logout.logoutFunction(logoutEvent, element, modal, backdrop);
-//   logout.closeModalFunction(closeEventClass, element, modal, backdrop);
-//   logout.declineFunction(declineBtn, element, modal, backdrop);
-
-//   ///////////////////////////////////////////
-//   // sidebar
-//   const sideMenuIcon = document.querySelector('.bi-list');
-//   const sidebarElement = document.querySelector('.menu');
-//   const sidebarBackdrop = document.querySelector('.backdrop');
-//   sidebar.sidebarfunction(
-//     sideMenuIcon,
-//     sidebarElement,
-//     sidebarBackdrop,
-//     dropDown
-//   );
-//   sidebar.closeSidebarFunction(sidebarBackdrop, sidebarElement);
-
+  const user = document.querySelector('.info');
+  const logoutModal = document
+    .querySelector('.logout-modal')
+    .querySelector('.modal');
+  user.addEventListener('click', () => {
+    if (logoutModal.style.display === 'block') {
+      logoutModal.style.display = 'none';
+    } else {
+      logoutModal.style.display = 'block';
+    }
+  });
   // //////////////////////////////////////////////
   //form validation
   const validateForm = () => {
@@ -38,29 +22,23 @@ function init() {
     const gender = genderParent.querySelectorAll('.gender');
     const Dob = document.querySelector('.dob');
     const email = document.querySelector('.email');
-    const address = document.querySelector(".address");
-    const city = document.querySelector(".city");
-    const postCode = document.querySelector(".postCode");
+    const address = document.querySelector('.address');
+    const city = document.querySelector('.city');
+    const postCode = document.querySelector('.postCode');
     const stateOfOrigin = document.querySelector('.stateOfOrigin');
-    const maritalStatue = document.querySelector(".marital-status");
-    const emergencyContact = document.querySelector(".emergency-contact-name");
+    const maritalStatue = document.querySelector('.marital-status');
     const password = document.querySelector('.password');
     const confirmPassword = document.querySelector('.confirmPassword');
-    const position = document.querySelector(".position");
-    const startDate = document.querySelector(".start-date")
-    
-    
+    const startDate = document.querySelector('.start-date');
 
-   
     //prettier-ignore
-    let nameErr = true;
-
+    let nameErr =  genderError = DobErr = emailErr = addressError = cityErr = stateError = postalCodeErr = maritalErr = startDateError = passwordError = confirmErr= true;
     if (fname.value.trim() === '') {
       errorMessage(fname, 'is required');
       nameErr = false;
     } else {
       const regrex = /^[a-zA-Z]+$/;
-      if (!regrex.test(fname.value.trim())) {
+      if (regrex.test(fname.value.trim()) === false) {
         errorMessage(fname, 'is not valid');
         nameErr = false;
       } else {
@@ -86,7 +64,7 @@ function init() {
       nameErr = false;
     } else {
       const regrex = /^[a-zA-Z]+$/;
-      if (!regrex.test(middleName.value.trim())) {
+      if (regrex.test(middleName.value.trim()) === false) {
         errorMessage(middleName, 'is not valid');
         nameErr = false;
       } else {
@@ -96,175 +74,132 @@ function init() {
     }
     if (gender[0].checked === false && gender[1].checked === false) {
       errorMessage(genderParent, 'is required');
-      nameErr = false;
+      genderError = false;
     } else {
       successMessage(genderParent);
-     nameErr = false;
+      genderError = false;
     }
-   
- 
     //Get the date from the TextBox.
-    const  regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
-    const parts = Dob.value.split("/");
-    const dtDOB = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+    const regex =
+      /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+    const parts = Dob.value.split('/');
+    const dtDOB = new Date(parts[1] + '/' + parts[0] + '/' + parts[2]);
     const dtCurrent = new Date();
     //Check whether valid dd/MM/yyyy Date Format.
-    if(!regex.test(Dob.value.trim())){
-      errorMessage(Dob,"Enter date in dd/MM/yyyy format ONLY.")
-      nameErr = false;
-    }
-    else if(dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
-      errorMessage(Dob,"Eligibility 18 years ONLY.");
-      nameErr =  false;
-    }
-    // else if(dtCurrent.getMonth() < dtDOB.getMonth()){
-    //   errorMessage(Dob,"is not yet up to 18.");
-    //   nameErr =  false;
-    // }
-    else {
-      successMessage(Dob)
-      nameErr = true;
+    if (regex.test(Dob.value.trim()) === false) {
+      errorMessage(Dob, 'Enter date in dd/MM/yyyy format ONLY.');
+      DobErr = false;
+    } else if (dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
+      errorMessage(Dob, 'Eligibility 18 years ONLY.');
+      DobErr = false;
+    } else {
+      successMessage(Dob);
+      DobErr = true;
     }
     if (email.value.trim() === '') {
       errorMessage(email, 'is required');
-      nameErr = false;
+      emailErr = false;
     } else {
       const regrex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
-      if (!regrex.test(email.value.trim())) {
+      if (regrex.test(email.value.trim()) === false) {
         errorMessage(email, 'is not valid');
-        nameErr = false;
+        emailErr = false;
       } else {
         successMessage(email);
-        nameErr = true;
+        emailErr = true;
       }
     }
-
     if (stateOfOrigin.value === 'Choose...') {
       errorMessage(stateOfOrigin, 'is required');
-      countryErr = false;
+      stateError = false;
     } else {
       successMessage(stateOfOrigin);
-      nameErr = true;
+      stateError = true;
     }
-
+    if (city.value.trim() === '') {
+      errorMessage(city, 'is required');
+      cityErr = false;
+    } else {
+      const regrex = /^[a-zA-Z]+$/;
+      if (regrex.test(city.value.trim()) === false) {
+        errorMessage(city, 'is not valid');
+        cityErr = false;
+      } else {
+        successMessage(city);
+        cityErr = true;
+      }
+    }
+    if (postCode.value.trim() === '') {
+      errorMessage(postCode, 'is required');
+      postalCodeErr = false;
+    } else {
+      const regex = /^\d{6}$/;
+      if (regex.test(postCode.value) === false) {
+        errorMessage(postCode, 'is not valid');
+        postalCodeErr = false;
+      } else {
+        successMessage(postCode);
+        postalCodeErr = true;
+      }
+    }
+    if (address.value.trim() === '') {
+      errorMessage(address, 'is required');
+      addressError = false;
+    } else {
+      if (address.value.length < 10) {
+        errorMessage(address, 'address should be atleast 10 character');
+        addressError = false;
+      } else {
+        successMessage(address);
+        addressError = true;
+      }
+    }
+    if (maritalStatue.value.trim() === '') {
+      errorMessage(maritalStatue, 'is required');
+      maritalErr = false;
+    } else {
+      successMessage(maritalStatue);
+      maritalErr = true;
+    }
+    if (startDate.value === '') {
+      errorMessage(startDate, 'is required');
+      startDateError = false;
+    } else {
+      successMessage(startDate);
+      startDateError = true;
+    }
     if (password.value.trim() === '') {
       errorMessage(password, 'is required');
-     nameErr = false;
+      passwordError = false;
     } else {
       const regex = new RegExp(`${fname.value}+${parts[1]}+${parts[2]}`);
       if (!regex.test(password.value.trim())) {
         errorMessage(password, 'is not valid');
-       nameErr = false;
+        passwordError = false;
       } else {
         successMessage(password);
-       nameErr = true;
+        passwordError = true;
       }
     }
 
     if (confirmPassword.value.trim() === '') {
       errorMessage(confirmPassword, 'is required');
-     nameErr = false;
+      confirmErr = false;
     } else if (confirmPassword.value.trim() != password.value.trim()) {
       errorMessage(confirmPassword, 'do not match');
-     nameErr = false;
+      confirmErr = false;
     } else {
       successMessage(confirmPassword);
-     nameErr = true;
+      confirmErr = true;
     }
-    if (city.value.trim() === '') {
-      errorMessage(city, 'is required');
-      nameErr = false;
-    }
-    else {
-      const regrex = /^[a-zA-Z]+$/;
-      if (!regrex.test(city.value.trim())) {
-        errorMessage(city, 'is not valid');
-        nameErr = false;
-      } else {
-        successMessage(city);
-        nameErr = true;
-      }
-    }
-    if (postCode.value.trim() === '') {
-      errorMessage(postCode, 'is required');
-      nameErr = false;
-    }
-    else {
-      successMessage(postCode);
-      nameErr = true;
-    }
-  
-    if (address.value.trim() === '') {
-      errorMessage(address, 'is required');
-      nameErr = false;
-    }
-    else {
-      const regrex = /^[a-zA-Z]+$/;
-      if (!regrex.test(address.value.trim())) {
-        errorMessage(address, 'is not valid');
-        nameErr = false;
-      }
-      if( address.value.length < 10){
-        errorMessage(address, 'address should be atleast 10 character');
-        nameErr = false;
-      } else {
-        successMessage(address);
-        nameErr = true;
-      }
-    }
-    if (maritalStatue.value.trim() === '') {
-      errorMessage(maritalStatue, 'is required');
-      nameErr = false;
-    }
-    else {
-        successMessage(maritalStatue);
-        nameErr = true;
-      }
 
-      if (emergencyContact.value.trim() === '') {
-        errorMessage(emergencyContact, 'is required');
-        nameErr = false;
-      }
-      else {
-        const regrex = /^[a-zA-Z]+$/;
-        if (!regrex.test(emergencyContact.value.trim())) {
-          errorMessage(emergencyContact, 'is not valid');
-          nameErr = false;
-        } else {
-          successMessage(emergencyContact);
-          nameErr = true;
-        }
-      }
-    
-      if (position.value.trim() === '') {
-        errorMessage(position, 'is required');
-        nameErr = false;
-      }
-      else {
-          successMessage(position);
-          nameErr = true;
-        }
-      
-      if (startDate.value === '') {
-        errorMessage(startDate, 'is required');
-        nameErr = false;
-      }
-      else {
-        successMessage(startDate);
-        nameErr = true;
-      }
-     
-    
-    //prettier-ignore
-    if(nameErr === true ){
+    if (nameErr === true) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   };
- 
 
   const errorMessage = (input, message) => {
     const inputParent = input.parentElement;
@@ -327,9 +262,7 @@ function init() {
   form.setAttribute('novalidate', '');
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (validateForm()) {
-      sendDataToFirebase(form);
-    }
+    validateForm();
   });
   const sendDataToFirebase = (formElement) => {
     const firstName = formElement.querySelector('.first-name').value;
@@ -341,15 +274,15 @@ function init() {
     const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
     const password = formElement.querySelector('.password').value;
     const confirmPassword = formElement.querySelector('.confirmPassword').value;
-    const address = formElement.querySelector(".address");
-    const city = formElement.querySelector(".city");
-    const postCode = formElement.querySelector(".postCode");
-    const maritalStatue = formElement.querySelector(".marital-status");
-    const emergencyContact = formElement.querySelector(".emergency-contact-name");
-    const position = formElement.querySelector(".position");
-    const startDate = formElement.querySelector(".start-date")
-
-
+    const address = formElement.querySelector('.address');
+    const city = formElement.querySelector('.city');
+    const postCode = formElement.querySelector('.postCode');
+    const maritalStatue = formElement.querySelector('.marital-status');
+    const emergencyContact = formElement.querySelector(
+      '.emergency-contact-name'
+    );
+    const position = formElement.querySelector('.position');
+    const startDate = formElement.querySelector('.start-date');
     //prettier-ignore
     const data = {
      firstName : firstName,

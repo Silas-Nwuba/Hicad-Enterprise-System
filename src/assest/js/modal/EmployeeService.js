@@ -33,17 +33,17 @@ export function writeUserData(data) {
     try {
         displayLoader();
         const db = getDatabase(app);
-       set(ref(db, 'employee/' + `Emp${generateId(100,1000)}`),data);
-      hideLoader();
-     setTimeout(()=>{
-     Swal.fire({ 
-      icon:"success",
-      title:'<h4 style="color:rgb(3, 133, 3)">Success</h4>',
-      text:'Successfully Registered',
-      confirmButtonColor:'rgb(3, 133, 3)',
+        set(ref(db, 'employee/' + `Emp${generateId(100,1000)}`),data);
+        hideLoader();
+    //    setTimeout(()=>{
+    //     Swal.fire({ 
+    //     icon:"success",
+    //     title:'<h4 style="color:rgb(3, 133, 3)">Success</h4>',
+    //     text:'Successfully Registered',
+    //     confirmButtonColor:'rgb(3, 133, 3)',
      
-     },3000)
-     })
+    //  },3000)
+    //  })
     } catch (error) {
         hideLoader();
         setTimeout(() => {
