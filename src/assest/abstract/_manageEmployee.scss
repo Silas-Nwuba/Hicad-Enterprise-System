@@ -190,9 +190,30 @@ html {
     tbody td a {
       margin: 30px 3px;
     }
-    tbody tr .action-btn {
-      line-height: 3;
+    tbody tr .action-button {
+      display: flex;
+      button {
+        max-width: 60px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        padding: 10px;
+        margin: 0px 3px;
+        text-transform: capitalize;
+      }
+      .edit-btn {
+        background-color: rgb(2, 2, 92);
+      }
+      .delete-btn {
+        background-color: rgb(160, 3, 3);
+        max-width: 80px;
+      }
     }
+    // tbody tr .action-btn {
+    //   line-height: 3;
+    // }
 
     footer {
       p {
