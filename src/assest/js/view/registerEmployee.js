@@ -1,6 +1,8 @@
 import { writeUserData } from '../modal/EmployeeService';
 
 function init() {
+  // //////////////////////////////////////////////
+  //logout
   const user = document.querySelector('.info');
   const logoutModal = document
     .querySelector('.logout-modal')
@@ -24,7 +26,7 @@ function init() {
     const email = document.querySelector('.email');
     const address = document.querySelector('.address');
     const city = document.querySelector('.city');
-    const postCode = document.querySelector('.postCode');
+    const imageUrl = document.querySelector('.image-url');
     const stateOfOrigin = document.querySelector('.stateOfOrigin');
     const maritalStatue = document.querySelector('.marital-status');
     const password = document.querySelector('.password');
@@ -32,13 +34,13 @@ function init() {
     const startDate = document.querySelector('.start-date');
 
     //prettier-ignore
-    let nameErr =  genderError = DobErr = emailErr = addressError = cityErr = stateError = postalCodeErr = maritalErr = startDateError = passwordError = confirmErr= true;
+    let nameErr =  genderError = DobErr = emailErr = addressError = cityErr = stateError = imageUrlError = maritalErr = startDateError = passwordError = confirmErr= true;
     if (fname.value.trim() === '') {
       errorMessage(fname, 'is required');
       nameErr = false;
     } else {
       const regrex = /^[a-zA-Z]+$/;
-      if (regrex.test(fname.value.trim()) === false) {
+      if (!regrex.test(fname.value.trim())) {
         errorMessage(fname, 'is not valid');
         nameErr = false;
       } else {
@@ -64,7 +66,7 @@ function init() {
       nameErr = false;
     } else {
       const regrex = /^[a-zA-Z]+$/;
-      if (regrex.test(middleName.value.trim()) === false) {
+      if (!regrex.test(middleName.value.trim())) {
         errorMessage(middleName, 'is not valid');
         nameErr = false;
       } else {
@@ -77,7 +79,7 @@ function init() {
       genderError = false;
     } else {
       successMessage(genderParent);
-      genderError = false;
+      genderError = true;
     }
     //Get the date from the TextBox.
     const regex =
@@ -86,7 +88,7 @@ function init() {
     const dtDOB = new Date(parts[1] + '/' + parts[0] + '/' + parts[2]);
     const dtCurrent = new Date();
     //Check whether valid dd/MM/yyyy Date Format.
-    if (regex.test(Dob.value.trim()) === false) {
+    if (!regex.test(Dob.value.trim())) {
       errorMessage(Dob, 'Enter date in dd/MM/yyyy format ONLY.');
       DobErr = false;
     } else if (dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
@@ -102,7 +104,7 @@ function init() {
     } else {
       const regrex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
-      if (regrex.test(email.value.trim()) === false) {
+      if (!regrex.test(email.value.trim())) {
         errorMessage(email, 'is not valid');
         emailErr = false;
       } else {
@@ -122,7 +124,7 @@ function init() {
       cityErr = false;
     } else {
       const regrex = /^[a-zA-Z]+$/;
-      if (regrex.test(city.value.trim()) === false) {
+      if (!regrex.test(city.value.trim())) {
         errorMessage(city, 'is not valid');
         cityErr = false;
       } else {
@@ -130,18 +132,12 @@ function init() {
         cityErr = true;
       }
     }
-    if (postCode.value.trim() === '') {
-      errorMessage(postCode, 'is required');
-      postalCodeErr = false;
+    if (imageUrl.value.trim() === '') {
+      errorMessage(imageUrl, 'is required');
+      imageUrlErrorErr = false;
     } else {
-      const regex = /^\d{6}$/;
-      if (regex.test(postCode.value) === false) {
-        errorMessage(postCode, 'is not valid');
-        postalCodeErr = false;
-      } else {
-        successMessage(postCode);
-        postalCodeErr = true;
-      }
+      successMessage(imageUrl);
+      imageUrlErrorErr = true;
     }
     if (address.value.trim() === '') {
       errorMessage(address, 'is required');
@@ -173,6 +169,14 @@ function init() {
       errorMessage(password, 'is required');
       passwordError = false;
     } else {
+      if (
+        password.value.trim() !== '' ||
+        fname.value.tirm() === '' ||
+        Dob.value.trim() === ''
+      ) {
+        errorMessage(password, 'is not valid');
+        passwordError = false;
+      }
       const regex = new RegExp(`${fname.value}+${parts[1]}+${parts[2]}`);
       if (!regex.test(password.value.trim())) {
         errorMessage(password, 'is not valid');
@@ -182,7 +186,6 @@ function init() {
         passwordError = true;
       }
     }
-
     if (confirmPassword.value.trim() === '') {
       errorMessage(confirmPassword, 'is required');
       confirmErr = false;
@@ -193,14 +196,26 @@ function init() {
       successMessage(confirmPassword);
       confirmErr = true;
     }
-
-    if (nameErr === true) {
+    //prettier-ignore
+    if (
+      (nameErr &&
+        genderError &&
+        DobErr &&
+        emailErr &&
+        addressError &&
+        cityErr &&
+        stateError &&
+        imageUrlError &&
+        maritalErr &&
+        startDateError &&
+        passwordError &&
+        confirmErr) === true
+    ) {
       return true;
     } else {
       return false;
     }
   };
-
   const errorMessage = (input, message) => {
     const inputParent = input.parentElement;
     const small = inputParent.querySelector('small');
@@ -262,7 +277,9 @@ function init() {
   form.setAttribute('novalidate', '');
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    validateForm();
+    if (validateForm()) {
+      sendDataToFirebase(form);
+    }
   });
   const sendDataToFirebase = (formElement) => {
     const firstName = formElement.querySelector('.first-name').value;
@@ -271,18 +288,14 @@ function init() {
     const gender = formElement.querySelector('.gender:checked').value;
     const Dob = formElement.querySelector('.dob').value;
     const email = formElement.querySelector('.email').value;
-    const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
-    const password = formElement.querySelector('.password').value;
-    const confirmPassword = formElement.querySelector('.confirmPassword').value;
     const address = formElement.querySelector('.address');
     const city = formElement.querySelector('.city');
-    const postCode = formElement.querySelector('.postCode');
+    const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
+    const imageUrl = formElement.querySelector('.image-url').value;
     const maritalStatue = formElement.querySelector('.marital-status');
-    const emergencyContact = formElement.querySelector(
-      '.emergency-contact-name'
-    );
-    const position = formElement.querySelector('.position');
     const startDate = formElement.querySelector('.start-date');
+    const password = formElement.querySelector('.password').value;
+    const confirmPassword = formElement.querySelector('.confirmPassword').value;
     //prettier-ignore
     const data = {
      firstName : firstName,
@@ -291,15 +304,13 @@ function init() {
      gender : gender,
      Dob:Dob,
      email : email,
-     stateOfOrigin:stateOfOrigin,
-     password : password,
-     confirmPassword:confirmPassword,
      address:address,
      city:city,
-     postCode : postCode,
+     stateOfOrigin:stateOfOrigin,
+     imageUrl : imageUrl,
      maritalStatue: maritalStatue,
-     emergencyContact: emergencyContact,
-     position: position,
+     password : password,
+     confirmPassword:confirmPassword,
      startDate:startDate,
    
     }
