@@ -7,6 +7,71 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
+.form-control:focus {
+  box-shadow: none;
+  border-color: #eee;
+}
+.form-select:focus {
+  box-shadow: none;
+  border-color: #eee;
+}
+.row {
+  display: flex;
+  margin: 0px 10px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+label {
+  display: flex;
+}
+.form-select-sm {
+  width: 70px;
+}
+.form-control {
+  width: 100%;
+  float: right;
+}
+.dataTables_filter {
+  margin-left: 150px;
+  float: right;
+}
+.dataTables_length {
+  position: relative;
+  top: 30px;
+}
+.dataTables_info {
+  margin: 20px 0px;
+  font-size: 14px;
+}
+.dataTables_paginate {
+  float: right;
+}
+.dataTables_empty {
+  font-size: 0.9rem;
+}
+.active > .page-link {
+  background-color: rgb(2, 2, 92);
+  border-color: rgb(2, 2, 92);
+  color: white;
+}
+.active > .page-link:focus {
+  box-shadow: none;
+  border-color: rgb(2, 2, 92);
+}
+.page-item:first-child .page-link:focus {
+  box-shadow: none;
+  border-color: #eee;
+}
+.page-item:last-child .page-link:focus {
+  box-shadow: none;
+  border-color: #eee;
+}
+.page-item:not(:first-child) .page-link {
+  box-shadow: none;
+  border-color: #eee;
+}
+
 html {
   overflow-x: hidden;
 }
@@ -159,8 +224,8 @@ html {
     table th {
       padding: 10px 15px;
       text-transform: uppercase;
-      font-weight: 600;
-      font-size: 14px;
+      font-weight: 500;
+      font-size: 0.9rem;
       color: #414141;
       background-color: #ddd;
     }
@@ -215,6 +280,108 @@ html {
     //   line-height: 3;
     // }
 
+    .logout-modal {
+      .modal {
+        display: none;
+        position: fixed;
+        top: 55%;
+        left: 87%;
+        transform: translate(-50%, -50%);
+        width: 240px;
+        z-index: 10000;
+        transition: 0.5s ease;
+      }
+      .modal-header {
+        background-color: darkblue;
+      }
+      .header-content {
+        gap: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+          line-height: 0.5;
+        }
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+        p {
+          color: white;
+          font-size: 0.8rem;
+          font-weight: 400;
+        }
+      }
+      .modal-body {
+        ul {
+          padding-left: 0px;
+        }
+        ul li {
+          font-size: 0.9rem;
+          padding: 10px 10px;
+          list-style: none;
+          margin: 10px 0px;
+          cursor: pointer;
+        }
+        ul li a {
+          text-decoration: none;
+          color: #464545;
+        }
+        ul li:hover {
+          background-color: #eeee;
+          border-radius: 4px;
+          width: 100%;
+          color: rgb(2, 2, 92);
+          font-weight: 500;
+        }
+      }
+    }
+    .table-footer-action {
+      margin: 20px 30px 0px 30px;
+      margin-bottom: 30px;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      .sorting select {
+        width: 60px;
+        outline: none;
+        height: 30px;
+        border: 1px solid #ebe9e9;
+        border-radius: 3px;
+      }
+      .pagination {
+        display: flex;
+        gap: 20px;
+        text-transform: capitalize;
+        font-size: 0.9rem;
+        cursor: pointer;
+        a {
+          text-decoration: none;
+        }
+        .next {
+          background-color: rgb(2, 2, 92);
+          color: white;
+          width: 90px;
+          border-radius: 4px;
+          padding: 10px 10px;
+          text-align: center;
+          a {
+            color: white;
+          }
+        }
+        .previous {
+          border: 1px solid rgb(2, 2, 92);
+          width: 90px;
+          border-radius: 4px;
+          padding: 10px 10px;
+          text-align: center;
+          a {
+            color: #333;
+          }
+        }
+      }
+    }
     footer {
       p {
         display: flex;

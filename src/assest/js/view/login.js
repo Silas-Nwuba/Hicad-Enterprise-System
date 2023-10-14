@@ -1,3 +1,4 @@
+import 'core-js/stable';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../modal/firebaseConfig';
 
@@ -111,7 +112,7 @@ const signUser = (username, password) => {
     })
     .catch((error) => {
       console.log(error.message);
-      notification.querySelector('.message').innerHTML = 'network issues';
+      notification.querySelector('.message').innerHTML = 'Network issues';
       notification.style.right = 0;
       setTimeout(() => {
         notification.style.right = '-300px';

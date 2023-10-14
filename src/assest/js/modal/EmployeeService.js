@@ -1,15 +1,17 @@
+import 'core-js/stable';
 import { getDatabase, ref, set } from 'firebase/database';
 import { app } from './firebaseConfig';
-import Swal from 'sweetalert2';
+import toastify from 'toastify-js';
 
 const loader = document.querySelector('.loader-spinner');
 const overlay = document.querySelector('.overlay');
 const form = document.querySelector('form');
+const notification = document.querySelector('.notification-model');
 const displayLoader = () => {
   loader.style.display = 'block';
   overlay.style.display = 'block';
   overlay.style.cursor = 'wait';
-  document.querySelector('html').overflowY = 'hidden';
+  document.querySelector('html').style.overflowY = 'hidden';
 };
 const hideLoader = () => {
   loader.style.display = 'none';
@@ -27,6 +29,21 @@ const generateId = (start, range) => {
   }
   return id;
 };
+const showError = () => {
+  notification.style.right = 10;
+  notification.querySelector('.message').innerHTML = 'Network issue';
+  notification.style.backgroundColor = 'red';
+  setTimeout(() => {
+    notification.style.right = '-300px';
+  }, 3000);
+};
+const showSuccess = () => {
+  notification.style.right = 10;
+  setTimeout(() => {
+    notification.style.right = '-300px';
+  }, 3000);
+};
+
 export function writeUserData(data) {
   displayLoader();
   const db = getDatabase(app);
@@ -34,27 +51,10 @@ export function writeUserData(data) {
   set(ref(db, 'employee/' + employeeId), data)
     .then(() => {
       hideLoader();
-      setTimeout(() => {
-        Swal.fire(
-          {
-            icon: 'success',
-            title: '<h4 style="color:rgb(3, 133, 3)">Success</h4>',
-            text: 'Successfully Registered',
-            confirmButtonColor: 'rgb(3, 133, 3)',
-          },
-          1000
-        );
-      });
+      showSuccess();
     })
     .catch(() => {
       hideLoader();
-      setTimeout(() => {
-        Swal.fire({
-          icon: 'error',
-          title: '<h4 style="color:rgb(179, 6, 6)">Error</h4>',
-          text: 'Registration Fails',
-          confirmButtonColor: 'rgb(3, 133, 3)',
-        });
-      }, 1000);
+      showError();
     });
 }

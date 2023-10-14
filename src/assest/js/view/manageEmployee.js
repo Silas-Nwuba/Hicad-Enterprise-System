@@ -4,18 +4,29 @@ import DataTable from 'datatables.net-bs5';
 import { app } from '../modal/firebaseConfig';
 import { ref, getDatabase, onValue } from 'firebase/database';
 
+//logout
+const user = document.querySelector('.info');
+const logoutModal = document
+  .querySelector('.logout-modal')
+  .querySelector('.modal');
+user.addEventListener('click', () => {
+  if (logoutModal.style.display === 'block') {
+    logoutModal.style.display = 'none';
+  } else {
+    logoutModal.style.display = 'block';
+  }
+});
+
 let temp = [];
 const tableElement = document.querySelector('#myTable');
 //renderItem in the table
-const btnEditIcon = `<a href="#" class="edit-btn"
-><svg
+const btnEditIcon = `class="edit-btn"><svg
   xmlns="http://www.w3.org/2000/svg"
   width="16"
   height="16"
   fill="currentColor"
   class="bi bi-pencil-square"
-  viewBox="0 0 16 16"
->
+  viewBox="0 0 16 16">
   <path
     d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
   />
@@ -26,7 +37,7 @@ const btnEditIcon = `<a href="#" class="edit-btn"
 </svg>
 </a
 >`;
-const btnDeleteIcon = `<a href="#" class="delete-btn"
+const btnDeleteIcon = `class="delete-btn"
 ><svg
   xmlns="http://www.w3.org/2000/svg"
   width="16"
@@ -52,10 +63,12 @@ let table = new DataTable(tableElement, {
   pageLength: 5,
   columns: [
     { data: 'id' },
+    { data: 'photo' },
     { data: 'fullname' },
     { data: 'gender' },
-    { data: 'age' },
+    { data: 'DOB' },
     { data: 'state' },
+    { data: 'startDate' },
     { data: 'email' },
     { data: `${actionBtn}` },
   ],
@@ -74,33 +87,52 @@ let table = new DataTable(tableElement, {
     },
   ],
 });
-const renderItemTable = () => {
-  let dataArr = [];
-  let uniqueKey = [];
-  const db = getDatabase(app);
-  const getItem = ref(db, 'employee');
-  onValue(getItem, (snapshot) => {
-    snapshot.forEach((childSnaphot) => {
-      const data = childSnaphot.val();
-      const { firstName, lastName, gender, age, email, stateOfOrigin } =
-        data.data();
-      //prettier-ignore
-      const firstname = firstName.charAt(0).toUpperCase() + firstName.slice(1);
-      const lastname = lastName.charAt(0).toUpperCase() + lastName.slice(1);
-      dataArr.push({
-        id: item.id.charAt(0).toUpperCase() + item.id.slice(1),
-        fullname: firstname + ' ' + lastname,
-        gender: gender.charAt(0).toUpperCase() + gender.slice(1),
-        age: age,
-        state: stateOfOrigin.charAt(0).toUpperCase() + stateOfOrigin.slice(1),
-        email: email.charAt(0).toUpperCase() + email.slice(1),
-      });
-      if (!uniqueKey.includes(id)) {
-        table.clear();
-        table.rows.add(dataItem);
-        table.draw();
-        uniqueKey.push(id);
-      }
-    });
-  });
-};
+
+dataArr.push({
+  id: 100,
+  imageUrl: imageUrl,
+  fullname: 'silas nwuba',
+  gender: 'male',
+  dateOfBirth: '20-20-2022',
+  state: 'anambra',
+  email: 'nwubasilas@gmail.com',
+});
+table.clear();
+table.rows.add(dataItem);
+table.draw();
+
+// const renderItemTable = () => {
+//   let dataArr = [];
+//   let uniqueKey = [];
+//   const db = getDatabase(app);
+//   const getItem = ref(db, 'employee');
+//   onValue(getItem, (snapshot) => {
+//     snapshot.forEach((childSnaphot) => {
+//       const data = childSnaphot.val();
+//       //prettier-ignore
+//       const {imageUrl, firstName, lastName, gender, Dob, email, stateOfOrigin } = data;
+//       //prettier-ignore
+//       const firstname = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+//       const lastname = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+//       dataArr.push({
+//         id: item.id.charAt(0).toUpperCase() + item.id.slice(1),
+//         imageUrl: imageUrl,
+//         fullname: firstname + ' ' + lastname,
+//         gender: gender.charAt(0).toUpperCase() + gender.slice(1),
+//         dateOfBirth: Dob,
+//         state: stateOfOrigin.charAt(0).toUpperCase() + stateOfOrigin.slice(1),
+//         email: email.charAt(0).toUpperCase() + email.slice(1),
+//       });
+//       table.clear();
+//       table.rows.add(dataItem);
+//       table.draw();
+//       // if (!uniqueKey.includes(id)) {
+//       //   table.clear();
+//       //   table.rows.add(dataItem);
+//       //   table.draw();
+//       //   uniqueKey.push(id);
+//       // }
+//     });
+//   });
+// };
+// renderItemTable();

@@ -1,6 +1,6 @@
 @import '/src/assest/abstract/_base.scss';
-@import '/node_modules/sweetalert2/src/sweetalert2.scss';
 @import '/node_modules/bootstrap/scss/bootstrap.scss';
+@import '/node_modules/sweetalert2/src/sweetalert2.scss';
 body {
   background-color: #cccc;
   display: flex;
@@ -125,7 +125,7 @@ html {
       margin-top: 20px;
       padding: 20px;
       height: auto;
-      width: 94%;
+      width: 95%;
       border-radius: 2px;
       box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
         rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
@@ -276,6 +276,27 @@ html {
         display: none;
       }
     }
+    .notification-model {
+      background-color: green;
+      border-radius: 2px;
+      width: 200px;
+      padding: 10px 5px 2px 5px;
+      z-index: inherit;
+      position: fixed;
+      top: 80px;
+      right: -300px;
+      transition: all 0.5s ease;
+      margin-right: 30px;
+      border-radius: 5px;
+      p {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 5px;
+        text-align: center;
+      }
+    }
+
     .logout-modal {
       .modal {
         display: none;
@@ -344,16 +365,6 @@ html {
         margin: 30px 0px;
       }
     }
-  }
-  .swal2-popup .swal2-styled:focus {
-    box-shadow: none !important;
-  }
-  .swal2-container {
-    z-index: 9999 !important;
-  }
-  .swal2-backdrop-show {
-    z-index: 9999;
-    background: rgba(0, 0, 0, 0.7);
   }
   // sending http request spinner
   .loader-spinner {
