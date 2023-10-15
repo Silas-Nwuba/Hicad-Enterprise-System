@@ -58,3 +58,4 @@ export function writeUserData(data) {
       showError();
     });
 }
+export function editUserData(data) {}

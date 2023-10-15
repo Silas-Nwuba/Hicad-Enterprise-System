@@ -288,12 +288,12 @@ function init() {
     const gender = formElement.querySelector('.gender:checked').value;
     const Dob = formElement.querySelector('.dob').value;
     const email = formElement.querySelector('.email').value;
-    const address = formElement.querySelector('.address');
-    const city = formElement.querySelector('.city');
+    const address = formElement.querySelector('.address').value;
+    const city = formElement.querySelector('.city').value;
     const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
     const imageUrl = formElement.querySelector('.image-url').value;
-    const maritalStatue = formElement.querySelector('.marital-status');
-    const startDate = formElement.querySelector('.start-date');
+    const maritalStatue = formElement.querySelector('.marital-status').value;
+    const startDate = formElement.querySelector('.start-date').value;
     const password = formElement.querySelector('.password').value;
     const confirmPassword = formElement.querySelector('.confirmPassword').value;
     //prettier-ignore
@@ -309,9 +309,10 @@ function init() {
      stateOfOrigin:stateOfOrigin,
      imageUrl : imageUrl,
      maritalStatue: maritalStatue,
+     startDate:startDate,
      password : password,
      confirmPassword:confirmPassword,
-     startDate:startDate,
+   
    
     }
     writeUserData(data);

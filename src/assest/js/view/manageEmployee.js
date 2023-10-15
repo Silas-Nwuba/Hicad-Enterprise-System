@@ -20,7 +20,7 @@ user.addEventListener('click', () => {
 let temp = [];
 const tableElement = document.querySelector('#myTable');
 //renderItem in the table
-const btnEditIcon = `class="edit-btn"><svg
+const btnEditIcon = `<button type="button"class="edit-btn"><svg
   xmlns="http://www.w3.org/2000/svg"
   width="16"
   height="16"
@@ -34,11 +34,8 @@ const btnEditIcon = `class="edit-btn"><svg
     fill-rule="evenodd"
     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
   />
-</svg>
-</a
->`;
-const btnDeleteIcon = `class="delete-btn"
-><svg
+</svg> </button>`;
+const btnDeleteIcon = `<button type="button"class="delete-btn"><svg
   xmlns="http://www.w3.org/2000/svg"
   width="16"
   height="16"
@@ -52,13 +49,10 @@ const btnDeleteIcon = `class="delete-btn"
   <path
     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"
   />
-</svg>
-</a
->`;
+</svg></button>`;
 
-const actionBtn = `<span class="action-button">${
-  btnEditIcon + ' ' + btnDeleteIcon
-}</span>`;
+const actionBtn = `<span class="action-button">
+${btnEditIcon + ' ' + btnDeleteIcon}</span>`;
 let table = new DataTable(tableElement, {
   pageLength: 5,
   columns: [
@@ -87,52 +81,54 @@ let table = new DataTable(tableElement, {
     },
   ],
 });
-
-dataArr.push({
-  id: 100,
-  imageUrl: imageUrl,
-  fullname: 'silas nwuba',
-  gender: 'male',
-  dateOfBirth: '20-20-2022',
-  state: 'anambra',
-  email: 'nwubasilas@gmail.com',
-});
-table.clear();
-table.rows.add(dataItem);
-table.draw();
-
-// const renderItemTable = () => {
-//   let dataArr = [];
-//   let uniqueKey = [];
-//   const db = getDatabase(app);
-//   const getItem = ref(db, 'employee');
-//   onValue(getItem, (snapshot) => {
-//     snapshot.forEach((childSnaphot) => {
-//       const data = childSnaphot.val();
-//       //prettier-ignore
-//       const {imageUrl, firstName, lastName, gender, Dob, email, stateOfOrigin } = data;
-//       //prettier-ignore
-//       const firstname = firstName.charAt(0).toUpperCase() + firstName.slice(1);
-//       const lastname = lastName.charAt(0).toUpperCase() + lastName.slice(1);
-//       dataArr.push({
-//         id: item.id.charAt(0).toUpperCase() + item.id.slice(1),
-//         imageUrl: imageUrl,
-//         fullname: firstname + ' ' + lastname,
-//         gender: gender.charAt(0).toUpperCase() + gender.slice(1),
-//         dateOfBirth: Dob,
-//         state: stateOfOrigin.charAt(0).toUpperCase() + stateOfOrigin.slice(1),
-//         email: email.charAt(0).toUpperCase() + email.slice(1),
-//       });
-//       table.clear();
-//       table.rows.add(dataItem);
-//       table.draw();
-//       // if (!uniqueKey.includes(id)) {
-//       //   table.clear();
-//       //   table.rows.add(dataItem);
-//       //   table.draw();
-//       //   uniqueKey.push(id);
-//       // }
-//     });
-//   });
-// };
-// renderItemTable();
+const renderEmployee = () => {
+  let dataArr = [];
+  const db = getDatabase(app);
+  const getItem = ref(db, 'employee');
+  onValue(getItem, (snapshot) => {
+    snapshot.forEach((childSnaphot) => {
+      const data = childSnaphot.val();
+      const id = snapshot.key;
+      //prettier-ignore
+      const {imageUrl, firstName, lastName,gender, Dob, email, stateOfOrigin,startDate} = data;
+      //prettier-ignore
+      const firstname = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+      const lastname = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+      const birthDate = Dob.split('/');
+      const birthFormat = `${birthDate[0]}-${birthDate[1]}-${birthDate[2]}`;
+      const filePath = imageUrl.split('\\');
+      const filenameAndExtension = filePath[2];
+      dataArr.push({
+        id: id,
+        photo: `<img src=${filenameAndExtension} alt="Photo">`,
+        fullname: firstname + ' ' + lastname,
+        gender: gender.charAt(0).toUpperCase() + gender.slice(1),
+        DOB: birthFormat,
+        state: stateOfOrigin.charAt(0).toUpperCase() + stateOfOrigin.slice(1),
+        startDate: startDate,
+        email: email.charAt(0).toUpperCase() + email.slice(1),
+      });
+      table.clear();
+      table.rows.add(dataArr);
+      table.draw();
+    });
+  });
+};
+renderEmployee();
+const editEmployee = () => {
+  tableElement.querySelector('tbody').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (e.target.closest('.edit-btn')) {
+      alert('working');
+      const row =
+        e.target.closest('.edit-btn').parentElement.parentElement.parentElement;
+      const id = row.children[0].innerText;
+      const name = row.children[1].innerText;
+      const gender = row.children[2].innerText;
+      const age = row.children[3].innerText;
+      const state = row.children[4].innerText;
+      const email = row.children[5].innerText;
+    }
+  });
+};
+editEmployee();
