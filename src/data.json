@@ -1,0 +1,29 @@
+[
+  {
+    "department": "IT",
+    "position": [
+      "IT cordinator",
+      "Network Administrator",
+      "System Analyst",
+      "Computer system manager"
+    ]
+  },
+  {
+    "department": "Human Resource",
+    "position": [
+      "Human Resource Analyst",
+      "Recruiter",
+      "Employement Manager",
+      "Recruiter Manager"
+    ]
+  },
+  {
+    "department": "Marketing",
+    "position": [
+      "Director of Marketing",
+      "Marketing Analyst",
+      "Marketing Coordinator",
+      "Marketing Consultant"
+    ]
+  }
+]
