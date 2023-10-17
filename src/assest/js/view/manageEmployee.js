@@ -520,13 +520,13 @@ const getInputName = (input) => {
   return text.textContent;
 };
 const updateEmployee = (formElement) => {
-  const id = formElement.querySelector('.modal').dataset.id;
+  const id = document.querySelector('.modal').dataset.id;
   const firstName = formElement.querySelector('.firstname').value;
   const lastName = formElement.querySelector('.lastname').value;
   const gender = formElement.querySelector('.gender:checked').value;
   const Dob = formElement.querySelector('.dob').value;
   const email = formElement.querySelector('.email').value;
-  const stateOfOrigin = formElement.querySelector('.state').value;
+  const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
   const startDate = formElement.querySelector('.start-date').value;
   const data = {
     firstName: firstName,
@@ -536,10 +536,8 @@ const updateEmployee = (formElement) => {
     email: email,
     stateOfOrigin: stateOfOrigin,
     startDate: startDate,
-    password: password,
-    confirmPassword: confirmPassword,
   };
   const submitBtn = formElement.querySelector('.submit-btn');
-  submitBtn.innerText = 'processing';
+  submitBtn.innerText = 'Processing...';
   editEmployeeData(id, data, submitBtn);
 };
