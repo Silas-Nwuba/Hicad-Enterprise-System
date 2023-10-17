@@ -2,7 +2,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime.js';
 import DataTable from 'datatables.net-bs5';
 import { app } from '../modal/firebaseConfig';
-import { ref, getDatabase, onValue } from 'firebase/database';
+import { getDatabase, onValue, ref } from 'firebase/database';
 
 //logout
 const user = document.querySelector('.info');
@@ -88,7 +88,7 @@ const renderEmployee = () => {
   onValue(getItem, (snapshot) => {
     snapshot.forEach((childSnaphot) => {
       const data = childSnaphot.val();
-      const id = snapshot.key;
+      const id = childSnaphot.key;
       //prettier-ignore
       const {imageUrl, firstName, lastName,gender, Dob, email, stateOfOrigin,startDate} = data;
       //prettier-ignore
@@ -96,11 +96,9 @@ const renderEmployee = () => {
       const lastname = lastName.charAt(0).toUpperCase() + lastName.slice(1);
       const birthDate = Dob.split('/');
       const birthFormat = `${birthDate[0]}-${birthDate[1]}-${birthDate[2]}`;
-      const filePath = imageUrl.split('\\');
-      const filenameAndExtension = filePath[2];
       dataArr.push({
         id: id,
-        photo: `<img src=${filenameAndExtension} alt="Photo">`,
+        photo: `<img src="${imageUrl}"alt="Photo">`,
         fullname: firstname + ' ' + lastname,
         gender: gender.charAt(0).toUpperCase() + gender.slice(1),
         DOB: birthFormat,
@@ -114,6 +112,7 @@ const renderEmployee = () => {
     });
   });
 };
+
 renderEmployee();
 const editEmployee = () => {
   tableElement.querySelector('tbody').addEventListener('click', (e) => {

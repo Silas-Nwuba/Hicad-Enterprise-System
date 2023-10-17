@@ -1,4 +1,11 @@
 import { writeUserData } from '../modal/EmployeeService';
+import {
+  ref,
+  getStorage,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
+import { app, storage } from '../modal/firebaseConfig';
 
 function init() {
   // //////////////////////////////////////////////
@@ -281,6 +288,7 @@ function init() {
       sendDataToFirebase(form);
     }
   });
+
   const sendDataToFirebase = (formElement) => {
     const firstName = formElement.querySelector('.first-name').value;
     const lastName = formElement.querySelector('.last-name').value;
@@ -291,12 +299,52 @@ function init() {
     const address = formElement.querySelector('.address').value;
     const city = formElement.querySelector('.city').value;
     const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
-    const imageUrl = formElement.querySelector('.image-url').value;
+    const imageUrl = document.querySelector('.image-url');
     const maritalStatue = formElement.querySelector('.marital-status').value;
     const startDate = formElement.querySelector('.start-date').value;
     const password = formElement.querySelector('.password').value;
     const confirmPassword = formElement.querySelector('.confirmPassword').value;
+    const file = imageUrl.files[0];
+    const { name } = file;
+
+    //send image to storage firebase
+    const loader = document.querySelector('.loader-spinner');
+    const overlay = document.querySelector('.overlay');
+    loader.style.display = 'block';
+    overlay.style.display = 'block';
+    overlay.style.cursor = 'wait';
+    document.querySelector('html').style.overflowY = 'hidden';
+
+    const storageRef = ref(storage, `images/${name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      },
+      (error) => {
+        console.log(error.message);
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          sendDataRealtimeDb(downloadURL);
+        });
+      }
+    );
     //prettier-ignore
+    const sendDataRealtimeDb = (url) => {
     const data = {
      firstName : firstName,
      lastName : lastName,
@@ -307,15 +355,15 @@ function init() {
      address:address,
      city:city,
      stateOfOrigin:stateOfOrigin,
-     imageUrl : imageUrl,
+     imageName : name,
+     imageUrl : url,
      maritalStatue: maritalStatue,
      startDate:startDate,
      password : password,
      confirmPassword:confirmPassword,
-   
-   
     }
     writeUserData(data);
+    }
   };
 }
 init();

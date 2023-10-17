@@ -1,7 +1,6 @@
 import 'core-js/stable';
 import { getDatabase, ref, set } from 'firebase/database';
 import { app } from './firebaseConfig';
-import toastify from 'toastify-js';
 
 const loader = document.querySelector('.loader-spinner');
 const overlay = document.querySelector('.overlay');
@@ -30,7 +29,7 @@ const generateId = (start, range) => {
   return id;
 };
 const showError = () => {
-  notification.style.right = 10;
+  notification.style.right = '0px';
   notification.querySelector('.message').innerHTML = 'Network issue';
   notification.style.backgroundColor = 'red';
   setTimeout(() => {
@@ -38,7 +37,7 @@ const showError = () => {
   }, 3000);
 };
 const showSuccess = () => {
-  notification.style.right = 10;
+  notification.style.right = '0px';
   setTimeout(() => {
     notification.style.right = '-300px';
   }, 3000);

@@ -320,9 +320,23 @@ html {
     }
     .edit-modal {
       .modal {
-        display: block;
+        display: none;
         z-index: 20000;
         top: 10%;
+        form {
+          margin-top: 20px;
+          input {
+            width: 100%;
+            padding: 10px 15px;
+            margin: 10px 0px;
+            border-radius: 5px;
+            flex-direction: column;
+          }
+        }
+      }
+      .close {
+        font-size: 30px;
+        cursor: pointer;
       }
     }
     .overlay {
@@ -333,7 +347,7 @@ html {
       left: 0;
       height: 100vh;
       z-index: 10000;
-      display: block;
+      display: none;
     }
     // tbody tr .action-btn {
     //   line-height: 3;
