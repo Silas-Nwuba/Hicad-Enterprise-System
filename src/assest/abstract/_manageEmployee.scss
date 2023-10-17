@@ -7,6 +7,9 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
+html {
+  overflow-y: visible;
+}
 .form-control:focus {
   box-shadow: none;
   border-color: #eee;
@@ -320,23 +323,123 @@ html {
     }
     .edit-modal {
       .modal {
-        display: none;
         z-index: 20000;
         top: 10%;
+        display: block;
+        width: 100%;
+        overflow-y: scroll;
         form {
           margin-top: 20px;
+          margin-left: 15px;
+          margin-right: 15px;
           input {
             width: 100%;
             padding: 10px 15px;
             margin: 10px 0px;
             border-radius: 5px;
-            flex-direction: column;
+            outline: none;
+            border: 1px solid #ccc;
+          }
+          input::placeholder {
+            font-size: 0.8rem;
+          }
+          label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4e4e4e;
+          }
+          .bi-asterisk {
+            color: red;
+          }
+          .gender-content input[type='radio'] {
+            width: 15px;
+            height: 15px;
+          }
+          .gender-content {
+            text-transform: capitalize;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 12px;
+          }
+          .gender-content label {
+            position: relative;
+            right: 5px;
+          }
+          select {
+            display: block;
+            width: 100%;
+            height: 45px;
+            outline: none;
+            border: 1px solid #ccc;
+            margin: 15px 0px;
+            border-radius: 2px;
+            padding: 10px 10px;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            option {
+              text-transform: capitalize;
+              font-size: 0.9rem;
+            }
+          }
+          .submit-btn {
+            border: none;
+            background-color: rgb(2, 2, 92);
+            margin: 20px 0px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            width: 100px;
+            height: 50px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 120px;
+            cursor: pointer;
+          }
+          .error-message {
+            color: red;
+            font-size: 13px;
+          }
+          .success-message {
+            display: none;
           }
         }
       }
       .close {
         font-size: 30px;
         cursor: pointer;
+      }
+      .modal-header {
+        background-color: rgb(2, 2, 92);
+        color: white;
+        button {
+          background-color: none;
+          border: none;
+          outline: none;
+        }
+      }
+    }
+    .notification-model {
+      background-color: red;
+      border-radius: 2px;
+      width: 250px;
+      padding: 10px 5px 2px 5px;
+      z-index: inherit;
+      position: fixed;
+      top: 10px;
+      right: -300px;
+      transition: all 0.5s ease;
+      margin-right: 30px;
+      border-radius: 3px;
+      z-index: 20000;
+      p {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 5px;
+        text-align: center;
       }
     }
     .overlay {

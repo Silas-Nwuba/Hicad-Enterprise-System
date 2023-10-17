@@ -1,11 +1,12 @@
 import 'core-js/stable';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, update } from 'firebase/database';
 import { app } from './firebaseConfig';
 
 const loader = document.querySelector('.loader-spinner');
 const overlay = document.querySelector('.overlay');
 const form = document.querySelector('form');
 const notification = document.querySelector('.notification-model');
+
 const displayLoader = () => {
   loader.style.display = 'block';
   overlay.style.display = 'block';
@@ -42,7 +43,6 @@ const showSuccess = () => {
     notification.style.right = '-300px';
   }, 3000);
 };
-
 export function writeUserData(data) {
   displayLoader();
   const db = getDatabase(app);
@@ -57,4 +57,14 @@ export function writeUserData(data) {
       showError();
     });
 }
-export function editUserData(data) {}
+export function editEmployeeData(id, data, submitBtn) {
+  const db = getDatabase(app);
+  update(ref(db, 'employee/', id), data)
+    .then(() => {
+      form.reset();
+      submitBtn.innerHTML = 'submit';
+    })
+    .catch((e) => {
+      alert('not working');
+    });
+}

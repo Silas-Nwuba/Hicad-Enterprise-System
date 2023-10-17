@@ -288,7 +288,6 @@ function init() {
       sendDataToFirebase(form);
     }
   });
-
   const sendDataToFirebase = (formElement) => {
     const firstName = formElement.querySelector('.first-name').value;
     const lastName = formElement.querySelector('.last-name').value;
