@@ -59,10 +59,10 @@ export function writeUserData(data) {
 }
 export function editEmployeeData(id, data, submitBtn) {
   const db = getDatabase(app);
-  update(ref(db, 'employee/', id), data)
+  update(ref(db, 'employee/' + id), data)
     .then(() => {
-      form.reset();
       submitBtn.innerHTML = 'submit';
+      form.reset();
     })
     .catch((e) => {
       alert('not working');

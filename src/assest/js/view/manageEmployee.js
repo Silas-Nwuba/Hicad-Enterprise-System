@@ -84,6 +84,7 @@ let table = new DataTable(tableElement, {
   ],
 });
 const renderEmployee = () => {
+  let uniqueKey = [];
   let dataArr = [];
   const db = getDatabase(app);
   const getItem = ref(db, 'employee');
@@ -98,16 +99,20 @@ const renderEmployee = () => {
       const lastname = lastName.charAt(0).toUpperCase() + lastName.slice(1);
       const birthDate = Dob.split('/');
       const birthFormat = `${birthDate[0]}-${birthDate[1]}-${birthDate[2]}`;
-      dataArr.push({
-        id: id,
-        photo: `<img src="${imageUrl}"alt="Photo">`,
-        fullname: firstname + ' ' + lastname,
-        gender: gender.charAt(0).toUpperCase() + gender.slice(1),
-        DOB: birthFormat,
-        state: stateOfOrigin.charAt(0).toUpperCase() + stateOfOrigin.slice(1),
-        startDate: startDate,
-        email: email.charAt(0).toUpperCase() + email.slice(1),
-      });
+
+      if (!uniqueKey.includes(id)) {
+        dataArr.push({
+          id: id,
+          photo: `<img src="${imageUrl}"alt="Photo">`,
+          fullname: firstname + ' ' + lastname,
+          gender: gender.charAt(0).toUpperCase() + gender.slice(1),
+          DOB: birthFormat,
+          state: stateOfOrigin.charAt(0).toUpperCase() + stateOfOrigin.slice(1),
+          startDate: startDate,
+          email: email.charAt(0).toUpperCase() + email.slice(1),
+        });
+        uniqueKey.push(id);
+      }
       table.clear();
       table.rows.add(dataArr);
       table.draw();
@@ -164,13 +169,6 @@ const renderItemOnEditModal = (
     let femaleCheck;
     let maleCheckValue;
     let femaleCheckValue;
-    if (genderCheck === 'Male') {
-      maleCheck = 'checked';
-      maleCheckValue = 'Male';
-    } else if (genderCheck === 'Female') {
-      femaleCheck = 'checked';
-      femaleCheckValue = 'Female';
-    }
     const html = ` <div class="modal" data-id = ${data.id}>
     <div class="modal-dialog">
       <div class="modal-content">
@@ -229,13 +227,13 @@ const renderItemOnEditModal = (
           <input
           type="radio"
           name="gender"
-          value="${maleCheckValue}"${maleCheck}
+          value="${data.gender}"checked
           class="gender"
         /><label for="male">male</label>
         <input
           type="radio"
           name="gender"
-          value="${femaleCheckValue}" ${femaleCheck}
+          value="${data.gender}" ${femaleCheck}
           class="gender"
           required
         /><label for="female">female</label>
@@ -528,6 +526,7 @@ const updateEmployee = (formElement) => {
   const email = formElement.querySelector('.email').value;
   const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
   const startDate = formElement.querySelector('.start-date').value;
+  console.log(gender);
   const data = {
     firstName: firstName,
     lastName: lastName,
@@ -537,7 +536,8 @@ const updateEmployee = (formElement) => {
     stateOfOrigin: stateOfOrigin,
     startDate: startDate,
   };
-  const submitBtn = formElement.querySelector('.submit-btn');
-  submitBtn.innerText = 'Processing...';
-  editEmployeeData(id, data, submitBtn);
+
+  // const submitBtn = formElement.querySelector('.submit-btn');
+  // submitBtn.innerText = 'Processing...';
+  // editEmployeeData(id, data, submitBtn);
 };
