@@ -6,7 +6,8 @@
       "Network Administrator",
       "System Analyst",
       "Computer system manager"
-    ]
+    ],
+    "type": ["Full Time", "Part Time", "Contract"]
   },
   {
     "department": "Human Resource",
@@ -15,7 +16,8 @@
       "Recruiter",
       "Employement Manager",
       "Recruiter Manager"
-    ]
+    ],
+    "type": ["Full Time", "Part Time", "Contract"]
   },
   {
     "department": "Marketing",
@@ -24,10 +26,7 @@
       "Marketing Analyst",
       "Marketing Coordinator",
       "Marketing Consultant"
-    ]
-  },
-  {
-    "job": "job category",
+    ],
     "type": ["Full Time", "Part Time", "Contract"]
   }
 ]

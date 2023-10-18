@@ -71,31 +71,32 @@ window.onload = function () {
       position.length = 1;
     }
   });
-
   //job type
   position.addEventListener('change', (e) => {
     if (e.target.value != '') {
       jobType.disabled = false;
-      const type = `<option value="Full Time">Full Time</option>
-      <option value="Part Time">Part Time</option>
-      <option value="Contract">Contract</option>`;
-      jobType.insertAdjacentHTML('beforeend', type);
+      data.forEach((item) => {
+        item.position.forEach((position) => {
+          if (position === e.target.value) {
+            item.type.forEach((job) => {
+              jobType.options[jobType.options.length] = new Option(job, job);
+            });
+          }
+        });
+      });
     } else {
       jobType.disabled = true;
       jobType.length = 1;
     }
   });
 };
-
-//validation
-
+//validations
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   if (validateForm()) {
     console.log('working');
   }
 });
-
 const validateForm = () => {
   const selectError = true;
   select.forEach((input) => {
@@ -113,7 +114,6 @@ const validateForm = () => {
     }
   });
 };
-
 const errorMessage = (input, message) => {
   const inputParent = input.parentElement;
   const small = inputParent.querySelector('small');
