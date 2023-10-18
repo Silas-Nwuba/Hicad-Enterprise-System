@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/assest/css/employeeDepartment.css" />
+    <script
+      type="module"
+      src="/src/assest/js/view/employeeDepartment.js"
+    ></script>
     <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/src/assest/css/manageEmployee.css" />
-    <script type="module" src="/src/assest/js/view/manageEmployee.js"></script>
-    <title>Hicad-enterprise | employee</title>
+    <title>Hicad-enterprise | department</title>
   </head>
   <body>
     <section class="menu">
@@ -50,24 +53,26 @@
           </li>
 
           <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-person-check"
-              viewBox="0 0 16 16"
+            <a href="/src/manageEmployee.html">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-person-check"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                />
+                <path
+                  d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"
+                /></svg
+              >Manage employee</a
             >
-              <path
-                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-              />
-              <path
-                d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"
-              /></svg
-            >Manage employee
           </li>
 
-          <li><a href="/src/employeeDepartment.html">
+          <li>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -83,7 +88,7 @@
                 d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
               />
             </svg>
-            Add department </a>
+            Add department
           </li>
           <li>
             <svg
@@ -168,92 +173,115 @@
           </div>
         </div>
       </div>
-      <div class="manageEmployee">
-        <span class="header">
-            <h2>Manage Employee</h2>
-            <span class="action">
-                <a href="/src/registerEmployee.html"> New employee</a>
-              </span>
-          </span>
-            <div class="manageEmployee-content">
-              <div class="table-container">
-                <table id="myTable">
-                  <thead>
-                    <tr>
-                      <th>S/N</th>
-                      <th>Photo</th>
-                      <th>Full name</th>
-                      <th>gender</th>
-                      <th>DOB</th>
-                      <th>state</th>
-                      <th>start date</th>
-                      <th>email</th>
-                      <th>action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-           <div class="edit-modal">
-      
-            </div>
-            <div class="notification-modal">
-              <p class="message"></p>
-            </div>
-
-            <div class="overlay"></div>
-            <div class="logout-modal">
-              <div class="modal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <div class="header-content">
-                        <img
-                          src="/image/IMG-20231004-WA0003.jpg"
-                          alt="img-profile"
-                        />
-                        <span>
-                          <p>Admin@gmail.com</p>
-                          <p>Logged in</p>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="modal-body">
-                      <ul>
-                        <li><a href="/src/app.html">Logout</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="loader-spinner">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-
-            <footer>
-              <p>
+      <div class="department">
+        <h3>Department</h3>
+        <form action="" autocapitalize="off">
+          <div class="row">
+            <div class="col-md-12">
+              <label for="Employee Name">
+                Employee
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="5"
+                  height="5"
                   fill="currentColor"
-                  class="bi bi-c-circle"
+                  class="bi bi-asterisk"
                   viewBox="0 0 16 16"
                 >
                   <path
-                    d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"
-                  />
-                </svg>
-                Hicad-Enterprise 2023
-              </p>
-            </footer>
+                    d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                  /></svg
+              ></label>
+              <select class="employee-name">
+                <option value="" selected>Select Employee</option>
+                <option value="silas nwuba">silas c nwuba</option>
+                <option value="silas nwuba">silas c nwuba</option>
+                <option value="silas nwuba">silas c nwuba</option>
+                <option value="silas nwuba">silas c nwuba</option>
+              </select>
+              <small></small>
+            </div>
+            <div class="col-md-12">
+              <label for="Department Name">
+                Department
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="5"
+                  fill="currentColor"
+                  class="bi bi-asterisk"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                  /></svg
+              ></label>
+              <select class="department-name">
+                <option value="" selected>Select Department</option>
+              </select>
+              <small></small>
+            </div>
+            <div class="col-md-12">
+              <label for="Position">
+                Position
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="5"
+                  fill="currentColor"
+                  class="bi bi-asterisk"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                  /></svg
+              ></label>
+              <select class="employee-position">
+                <option value="" selected>Select Position</option>
+              </select>
+              <small></small>
+            </div>
+            <div class="col">
+              <label for="job Type">
+                Job Type
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="5"
+                  fill="currentColor"
+                  class="bi bi-asterisk"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                  /></svg
+              ></label>
+              <select class="job-type">
+                <option value="" selected>Select Type</option>
+              </select>
+              <small></small>
+            </div>
           </div>
+          <button type="submit">Submit</button>
+        </form>
+
+        <footer>
+          <p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-c-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"
+              />
+            </svg>
+            Hicad-Enterprise 2023
+          </p>
+        </footer>
       </div>
     </section>
   </body>

@@ -1,11 +1,12 @@
 import 'core-js/stable';
-import { getDatabase, ref, set, update } from 'firebase/database';
+import { getDatabase, ref, set, update, remove } from 'firebase/database';
 import { app } from './firebaseConfig';
 
 const loader = document.querySelector('.loader-spinner');
 const overlay = document.querySelector('.overlay');
 const form = document.querySelector('form');
 const notification = document.querySelector('.notification-modal');
+const editModal = document.querySelector('.edit-modal');
 
 const displayLoader = () => {
   loader.style.display = 'block';
@@ -57,16 +58,15 @@ export function writeUserData(data) {
       showError();
     });
 }
-export function editEmployeeData(id, data, submitBtn) {
+
+export function editEmployeeData(id, data) {
   const db = getDatabase(app);
   update(ref(db, 'employee/' + id), data)
     .then(() => {
-      submitBtn.innerHTML = 'submit';
-      notification.querySelector('.message').innerHTML = 'Successfully update';
-      notification.style.right = '0px';
-      setTimeout(() => {
-        notification.style.right = '-300px';
-      }, 1000);
+      //localStorage for success message
+      const localKey = 'successMessage';
+      localStorage.setItem(localKey, 'Successfully Updated');
+      window.location.reload();
     })
     .catch(() => {
       notification.style.right = '0px';
@@ -77,3 +77,37 @@ export function editEmployeeData(id, data, submitBtn) {
       }, 1000);
     });
 }
+
+export function deleteEmployeeData(id) {
+  displayLoader();
+  const db = getDatabase(app);
+  remove(ref(db, 'employee/' + id))
+    .then(() => {
+      //localStorage for success message
+      const localKey = 'successMessage';
+      localStorage.setItem(localKey, 'Successfully Deleted');
+      window.location.reload();
+    })
+    .catch(() => {
+      hideLoader();
+      notification.style.right = '0px';
+      notification.querySelector('.message').innerHTML = 'Network issue';
+      notification.style.backgroundColor = 'red';
+      setTimeout(() => {
+        notification.style.right = '-300px';
+      }, 1000);
+    });
+}
+
+const successMessage = () => {
+  const message = localStorage.getItem('successMessage');
+  if (message) {
+    notification.querySelector('.message').innerHTML = message;
+    notification.style.right = '0px';
+    setTimeout(() => {
+      notification.style.right = '-300px';
+    }, 3500);
+    localStorage.removeItem('successMessage');
+  }
+};
+successMessage();

@@ -25,5 +25,9 @@
       "Marketing Coordinator",
       "Marketing Consultant"
     ]
+  },
+  {
+    "job": "job category",
+    "type": ["Full Time", "Part Time", "Contract"]
   }
 ]

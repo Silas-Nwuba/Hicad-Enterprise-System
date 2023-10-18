@@ -2,8 +2,8 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime.js';
 import DataTable from 'datatables.net-bs5';
 import { app } from '../modal/firebaseConfig';
-import { getDatabase, onValue, ref } from 'firebase/database';
-import { editEmployeeData } from '../modal/EmployeeService';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { deleteEmployeeData, editEmployeeData } from '../modal/EmployeeService';
 
 //logout
 const user = document.querySelector('.info');
@@ -19,11 +19,9 @@ user.addEventListener('click', () => {
     logoutModal.style.display = 'block';
   }
 });
-
 const tableElement = document.querySelector('#myTable');
 //renderItem in the table
-const btnEditIcon = `<button type="button"class="edit-btn" data-toggle="model" data-target="#editModal"><svg
-  xmlns="http://www.w3.org/2000/svg"
+const btnEditIcon = `<button type="button"class="edit-btn"><svg
   width="16"
   height="16"
   fill="currentColor"
@@ -38,7 +36,6 @@ const btnEditIcon = `<button type="button"class="edit-btn" data-toggle="model" d
   />
 </svg> </button>`;
 const btnDeleteIcon = `<button type="button"class="delete-btn"><svg
-  xmlns="http://www.w3.org/2000/svg"
   width="16"
   height="16"
   fill="currentColor"
@@ -93,20 +90,17 @@ const renderEmployee = () => {
       const data = childSnaphot.val();
       const id = childSnaphot.key;
       //prettier-ignore
-      const {imageUrl, firstName, lastName,gender, Dob, email, stateOfOrigin,startDate} = data;
+      const {imageUrl, firstName, lastName, gender, Dob, email, stateOfOrigin, startDate} = data;
       //prettier-ignore
       const firstname = firstName.charAt(0).toUpperCase() + firstName.slice(1);
       const lastname = lastName.charAt(0).toUpperCase() + lastName.slice(1);
-      const birthDate = Dob.split('/');
-      const birthFormat = `${birthDate[0]}-${birthDate[1]}-${birthDate[2]}`;
-
       if (!uniqueKey.includes(id)) {
         dataArr.push({
           id: id,
           photo: `<img src="${imageUrl}"alt="Photo">`,
           fullname: firstname + ' ' + lastname,
           gender: gender.charAt(0).toUpperCase() + gender.slice(1),
-          DOB: birthFormat,
+          DOB: Dob,
           state: stateOfOrigin.charAt(0).toUpperCase() + stateOfOrigin.slice(1),
           startDate: startDate,
           email: email.charAt(0).toUpperCase() + email.slice(1),
@@ -120,7 +114,6 @@ const renderEmployee = () => {
   });
 };
 renderEmployee();
-
 const editEmployee = () => {
   tableElement.querySelector('tbody').addEventListener('click', (e) => {
     e.preventDefault();
@@ -574,13 +567,13 @@ const renderItemOnEditModal = (
       editModal.querySelector('.modal').style.display = 'block';
       overlay.style.display = 'block';
       const formUpdate = document.querySelector('form');
+      formUpdate.addEventListener('submit', validateUpdateForm);
       formUpdate.setAttribute('novalidate', '');
       editModal.querySelector('.close').addEventListener('click', closeModal);
     }
   });
 };
 editEmployee();
-
 const validateUpdateForm = (e) => {
   e.preventDefault();
   const targetElement = e.target;
@@ -589,12 +582,8 @@ const validateUpdateForm = (e) => {
   }
 };
 const validateForm = (element) => {
-  console.log(element);
   const firstname = element.querySelector('.firstname');
-  console.log(firstname);
   const lastname = element.querySelector('.lastname');
-  // const genderParent = element.querySelector('.gender-content');
-  // const gender = document.querySelectorAll('.gender');
   const dob = element.querySelector('.dob');
   const state = element.querySelector('.stateOfOrigin');
   const startDate = element.querySelector('.start-date');
@@ -706,7 +695,6 @@ const updateEmployee = (formElement) => {
   const email = formElement.querySelector('.email').value;
   const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
   const startDate = formElement.querySelector('.start-date').value;
-  console.log(gender);
   const data = {
     firstName: firstName,
     lastName: lastName,
@@ -716,10 +704,9 @@ const updateEmployee = (formElement) => {
     stateOfOrigin: stateOfOrigin,
     startDate: startDate,
   };
-
-  const submitBtn = formElement.querySelector('.submit-btn');
-  submitBtn.innerText = 'Processing...';
-  editEmployeeData(id, data, submitBtn);
+  const submitBtn = document.querySelector('.submit-btn');
+  submitBtn.innerHTML = 'Processing...';
+  editEmployeeData(id, data);
 };
 
 //close edit modal
@@ -728,3 +715,18 @@ const closeModal = () => {
   overlay.style.display = 'none';
   temp = [];
 };
+
+//delete employee
+const deleteEmployee = () => {
+  tableElement.querySelector('tbody').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (e.target.closest('.delete-btn')) {
+      const row =
+        e.target.closest('.delete-btn').parentElement.parentElement
+          .parentElement;
+      const id = row.children[0].innerText;
+      deleteEmployeeData(id);
+    }
+  });
+};
+deleteEmployee();
