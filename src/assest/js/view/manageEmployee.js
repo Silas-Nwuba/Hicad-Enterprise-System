@@ -165,11 +165,8 @@ const renderItemOnEditModal = (
     const firstName = data.name.split(' ')[0];
     const lastName = data.name.split(' ')[1];
     const genderCheck = data.gender;
-    let maleCheck;
-    let femaleCheck;
-    let maleCheckValue;
-    let femaleCheckValue;
-    const html = ` <div class="modal" data-id = ${data.id}>
+    if (genderCheck === 'Male') {
+      const html = ` <div class="modal" data-id = ${data.id}>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -223,21 +220,11 @@ const renderItemOnEditModal = (
                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
               /></svg
           ></label>
-          <div class="gender-content" name="gender">
-          <input
-          type="radio"
-          name="gender"
-          value="${data.gender}"checked
-          class="gender"
-        /><label for="male">male</label>
-        <input
-          type="radio"
-          name="gender"
-          value="${data.gender}" ${femaleCheck}
-          class="gender"
-          required
-        /><label for="female">female</label>
-      </div>
+          <select  class="gender" >
+          <option value="${data.gender}"selected>${data.gender}</option>
+          <option value="female">Female</option>
+          </select>
+      
       <small></small>
       </div>
 
@@ -369,20 +356,227 @@ const renderItemOnEditModal = (
   <small></small>
   </div>
 
-  <button type="submit" class="submit-btn">Submit</button>
+  <button type="submit" class="submit-btn">Update</button>
           </form>
         </div>
          
       </div>
     </div>
   </div>`;
-    document.querySelector('html').style.overflowY = 'hidden';
-    editModal.insertAdjacentHTML('beforeend', html);
-    editModal.querySelector('.modal').style.display = 'block';
-    overlay.style.display = 'block';
-    const formUpdate = document.querySelector('form');
-    formUpdate.setAttribute('novalidate', '');
-    formUpdate.addEventListener('submit', validateUpdateForm);
+      document.querySelector('html').style.overflowY = 'hidden';
+      editModal.insertAdjacentHTML('beforeend', html);
+      editModal.querySelector('.modal').style.display = 'block';
+      overlay.style.display = 'block';
+      const formUpdate = document.querySelector('form');
+      formUpdate.setAttribute('novalidate', '');
+      formUpdate.addEventListener('submit', validateUpdateForm);
+      editModal.querySelector('.close').addEventListener('click', closeModal);
+    } else {
+      const html = ` <div class="modal" data-id = ${data.id}>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Employee</h5>
+              <span aria-hidden="true" class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+             <form autoComplete="off">
+             <div class="col">
+              <label for="fname">Firstname<svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="5" 
+                height="5"
+                fill="currentColor"
+                class="bi bi-asterisk"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                /></svg
+            ></label>
+             <input type="text" placeholder="Firstname" value=${firstName} class="firstname">
+              <small></small>
+              </div>
+              <div class="col">
+              <label for="fname">Lastname<svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="5" 
+                height="5"
+                fill="currentColor"
+                class="bi bi-asterisk"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                /></svg
+            ></label>
+             <input type="text" placeholder="Lastname" value=${lastName} class="lastname">
+              <small></small>
+              </div>
+              <div class="col">
+              <label for="Gender">Gender<svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="5" 
+                height="5"
+                fill="currentColor"
+                class="bi bi-asterisk"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+                /></svg
+            ></label>
+            
+            <select class="gender">
+            <option value="${data.gender}"selected>${data.gender}</option>
+            <option value="male">Male</option>
+            </select>
+        <small></small>
+        </div>
+  
+        <div class="col">
+        <label for="age"
+        >Date of Birth
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="5"
+          height="5"
+          fill="currentColor"
+          class="bi bi-asterisk"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+          /></svg
+      ></label>
+  
+      <input
+        type="text"
+        class="dob"
+        placeholder="DD/MM/YYYY"
+        required
+        value=${data.dob}
+      />
+      <small></small>
+      </div>
+  
+      <div class="col">
+      <label for="state"
+        >State of Origin
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="5"
+          height="5"
+          fill="currentColor"
+          class="bi bi-asterisk"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+          /></svg
+      ></label>
+      <select name="state of origin" class="stateOfOrigin" required>
+        <option value=${data.state}>${data.state}</option>
+        <option value="Abia">Abia</option>
+        <option value="Adamawa">Adamawa</option>
+        <option value="Akwa ibom">Akwa ibom</option>
+        <option value="Anambra">Anambra</option>
+        <option value="Bauchi">Bauchi</option>
+        <option value="Bayelsa">Bayelsa</option>
+        <option value="Benue">Benue</option>
+        <option value="Borno">Borno</option>
+        <option value="Cross river">cross river</option>
+        <option value="Delta">Delta</option>
+        <option value="Ebonyi">Ebonyi</option>
+        <option value="Edo">Edo</option>
+        <option value="Ekiti">Ekiti</option>
+        <option value="Enugu">Enugu</option>
+        <option value="Gombe">Gombe</option>
+        <option value="Imo">Imo</option>
+        <option value="Jigawa">Jigawa</option>
+        <option value="Kaduna">Kaduna</option>
+        <option value="Kano">Kano</option>
+        <option value="Katstina">Katstina</option>
+        <option value="Kebbi">Kebbi</option>
+        <option value="Kogi">Kogi</option>
+        <option value="Kwara">Kwara</option>
+        <option value="Lagos">Lagos</option>
+        <option value="Nasarawa">Nasarawa</option>
+        <option value="Niger">Niger</option>
+        <option value="Ogun">Ogun</option>
+        <option value="Ondo">Ondo</option>
+        <option value="Osun">Osun</option>
+        <option value="Oyo">Oyo</option>
+        <option value="Plateau">Plateau</option>
+        <option value="River">River</option>
+        <option value="Sokoto">Sokoto</option>
+        <option value="Taraba">Taraba</option>
+        <option value="Yobe">Yobe</option>
+        <option value="Zamfara">Zamfara</option>
+        <option value="Fct">Fct</option>
+      </select>
+  
+      <small></small>
+      </div>
+      <div class="col">
+      <label for="start-date"> Start Date
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="5"
+        height="5"
+        fill="currentColor"
+        class="bi bi-asterisk"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+        />
+      </svg></label>
+      <input type="date" class="start-date" required value=${data.startDate} />
+      <small></small>
+  </div>
+  
+       <div class="col">
+      <label for="email"
+      >Email address
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="5"
+        height="5"
+        fill="currentColor"
+        class="bi bi-asterisk"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"
+        /></svg
+    ></label>
+    <input
+      type="email"
+      class="email"
+      name="Email address"
+      placeholder="Email Address"
+      required
+      value=${data.email}
+    />
+    <small></small>
+    </div>
+  
+    <button type="submit" class="submit-btn">Update</button>
+            </form>
+          </div>
+           
+        </div>
+      </div>
+    </div>`;
+      document.querySelector('html').style.overflowY = 'hidden';
+      editModal.insertAdjacentHTML('beforeend', html);
+      editModal.querySelector('.modal').style.display = 'block';
+      overlay.style.display = 'block';
+      const formUpdate = document.querySelector('form');
+      formUpdate.setAttribute('novalidate', '');
+      editModal.querySelector('.close').addEventListener('click', closeModal);
+    }
   });
 };
 editEmployee();
@@ -399,15 +593,15 @@ const validateForm = (element) => {
   const firstname = element.querySelector('.firstname');
   console.log(firstname);
   const lastname = element.querySelector('.lastname');
-  const genderParent = element.querySelector('.gender-content');
-  const gender = genderParent.querySelectorAll('.gender');
+  // const genderParent = element.querySelector('.gender-content');
+  // const gender = document.querySelectorAll('.gender');
   const dob = element.querySelector('.dob');
   const state = element.querySelector('.stateOfOrigin');
   const startDate = element.querySelector('.start-date');
   const email = element.querySelector('.email');
 
   //prettier-ignore
-  let nameErr =  genderError = dobErr = emailErr = stateError = startDateError = true;
+  let nameErr = dobErr = emailErr = stateError = startDateError = true;
   if (firstname.value.trim() === '') {
     errorMessage(firstname, 'is required');
     nameErr = false;
@@ -434,15 +628,8 @@ const validateForm = (element) => {
       nameErr = true;
     }
   }
-  if (gender[0].checked === false && gender[1].checked === false) {
-    errorMessage(genderParent, 'is required');
-    genderError = false;
-  } else {
-    successMessage(genderParent);
-    genderError = true;
-  }
   //Get the date from the TextBox.
-  const regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+  // const regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
   const parts = dob.value.split('/');
   const dtDOB = new Date(parts[1] + '/' + parts[0] + '/' + parts[2]);
   const dtCurrent = new Date();
@@ -487,14 +674,7 @@ const validateForm = (element) => {
     startDateError = true;
   }
 
-  if (
-    nameErr &&
-    genderError &&
-    dobErr &&
-    emailErr &&
-    stateError &&
-    startDateError === true
-  ) {
+  if (nameErr && dobErr && emailErr && stateError && startDateError === true) {
     return true;
   } else {
     return false;
@@ -521,7 +701,7 @@ const updateEmployee = (formElement) => {
   const id = document.querySelector('.modal').dataset.id;
   const firstName = formElement.querySelector('.firstname').value;
   const lastName = formElement.querySelector('.lastname').value;
-  const gender = formElement.querySelector('.gender:checked').value;
+  const gender = formElement.querySelector('.gender').value;
   const Dob = formElement.querySelector('.dob').value;
   const email = formElement.querySelector('.email').value;
   const stateOfOrigin = formElement.querySelector('.stateOfOrigin').value;
@@ -537,7 +717,14 @@ const updateEmployee = (formElement) => {
     startDate: startDate,
   };
 
-  // const submitBtn = formElement.querySelector('.submit-btn');
-  // submitBtn.innerText = 'Processing...';
-  // editEmployeeData(id, data, submitBtn);
+  const submitBtn = formElement.querySelector('.submit-btn');
+  submitBtn.innerText = 'Processing...';
+  editEmployeeData(id, data, submitBtn);
+};
+
+//close edit modal
+const closeModal = () => {
+  editModal.querySelector('.modal').remove();
+  overlay.style.display = 'none';
+  temp = [];
 };

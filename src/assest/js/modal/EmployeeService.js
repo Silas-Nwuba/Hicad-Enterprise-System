@@ -5,7 +5,7 @@ import { app } from './firebaseConfig';
 const loader = document.querySelector('.loader-spinner');
 const overlay = document.querySelector('.overlay');
 const form = document.querySelector('form');
-const notification = document.querySelector('.notification-model');
+const notification = document.querySelector('.notification-modal');
 
 const displayLoader = () => {
   loader.style.display = 'block';
@@ -62,9 +62,18 @@ export function editEmployeeData(id, data, submitBtn) {
   update(ref(db, 'employee/' + id), data)
     .then(() => {
       submitBtn.innerHTML = 'submit';
-      form.reset();
+      notification.querySelector('.message').innerHTML = 'Successfully update';
+      notification.style.right = '0px';
+      setTimeout(() => {
+        notification.style.right = '-300px';
+      }, 1000);
     })
-    .catch((e) => {
-      alert('not working');
+    .catch(() => {
+      notification.style.right = '0px';
+      notification.querySelector('.message').innerHTML = 'Network issue';
+      notification.style.backgroundColor = 'red';
+      setTimeout(() => {
+        notification.style.right = '-300px';
+      }, 1000);
     });
 }
