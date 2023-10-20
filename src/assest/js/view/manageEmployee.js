@@ -714,6 +714,7 @@ const closeModal = () => {
   editModal.querySelector('.modal').remove();
   overlay.style.display = 'none';
   temp = [];
+  document.querySelector('html').style.overflowY = 'visible';
 };
 
 //delete employee

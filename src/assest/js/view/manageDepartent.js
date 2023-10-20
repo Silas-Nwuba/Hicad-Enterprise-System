@@ -85,7 +85,8 @@ const renderDepartment = () => {
   onValue(getItem, (snapshot) => {
     snapshot.forEach((childSnaphot) => {
       const data = childSnaphot.val();
-      const id = childSnaphot.key;
+      const id =
+        childSnaphot.key.charAt(0).toUpperCase() + childSnaphot.key.slice(1);
       //prettier-ignore
       const { employeeName, departmentName, employeePosition,jobType} = data;
       console.log(employeeName, departmentName, employeePosition, jobType);
