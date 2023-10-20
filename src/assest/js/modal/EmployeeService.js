@@ -6,7 +6,6 @@ const loader = document.querySelector('.loader-spinner');
 const overlay = document.querySelector('.overlay');
 const form = document.querySelector('form');
 const notification = document.querySelector('.notification-modal');
-const editModal = document.querySelector('.edit-modal');
 
 const displayLoader = () => {
   loader.style.display = 'block';

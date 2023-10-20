@@ -1,18 +1,40 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime.js';
 import data from '../../../data.json';
-
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { app } from '../modal/firebaseConfig';
 const employeeName = document.querySelector('.employee-name');
 const departmentName = document.querySelector('.department-name');
 const position = document.querySelector('.employee-position');
 const jobType = document.querySelector('.job-type');
 const select = document.querySelectorAll('select');
 const form = document.querySelector('form');
+
+const db = getDatabase(app);
+const startRef = ref(db, 'employee');
+onValue(startRef, (snaphot) => {
+  snaphot.forEach((childSnapshot) => {
+    const { firstName, lastName, middleName } = childSnapshot.val();
+    const dot = '.';
+    const fullname =
+      firstName.charAt(0).toUpperCase() +
+      firstName.slice(1) +
+      ' ' +
+      middleName.charAt(0).toUpperCase() +
+      dot +
+      ' ' +
+      lastName.charAt(0).toUpperCase() +
+      lastName.slice(1);
+    employeeName.options[employeeName.options.length] = new Option(
+      fullname,
+      fullname
+    );
+  });
+});
 window.onload = function () {
   departmentName.disabled = true;
   position.disabled = true;
   jobType.disabled = true;
-
   select.forEach((select) => {
     if (select.disabled === true) {
       select.style.cursor = 'auto';
@@ -35,7 +57,6 @@ window.onload = function () {
       departmentName.length = 1;
       position.length = 1;
       jobType.length = 1;
-
       data.forEach((item) => {
         const { department } = item;
         //prettier-ignore
@@ -75,6 +96,7 @@ window.onload = function () {
   position.addEventListener('change', (e) => {
     if (e.target.value != '') {
       jobType.disabled = false;
+      jobType.length = 1;
       data.forEach((item) => {
         item.position.forEach((position) => {
           if (position === e.target.value) {
@@ -98,7 +120,7 @@ form.addEventListener('submit', (e) => {
   }
 });
 const validateForm = () => {
-  const selectError = true;
+  let selectError = true;
   select.forEach((input) => {
     if (input.value.trim() === '') {
       errorMessage(input, 'is required');
@@ -107,12 +129,12 @@ const validateForm = () => {
       successMessage(input);
       selectError = true;
     }
-    if (selectError === true) {
-      return true;
-    } else {
-      return false;
-    }
   });
+  if (selectError === true) {
+    return true;
+  } else {
+    return false;
+  }
 };
 const errorMessage = (input, message) => {
   const inputParent = input.parentElement;
