@@ -8,8 +8,8 @@ body {
   overflow-x: hidden;
 }
 html {
-  overflow-y: visible;
   overflow-x: hidden;
+  overflow-y: visible;
 }
 .form-control:focus {
   box-shadow: none;
@@ -72,6 +72,7 @@ label {
   box-shadow: none;
   border-color: #eee;
 }
+
 .menu {
   width: 270px;
   height: 100vh;
@@ -98,7 +99,6 @@ label {
       font-size: 0.8rem;
       padding: 20px 15px;
       cursor: pointer;
-      transition: 0.5s ease;
     }
     li a {
       text-decoration: none;
@@ -127,7 +127,7 @@ label {
       rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
     width: calc(100% - 270px);
     margin-left: 270px;
-    z-index: 10000;
+    z-index: 9999;
     position: fixed;
     .nav-content {
       display: flex;
@@ -153,7 +153,6 @@ label {
         svg {
           cursor: pointer;
         }
-
         img {
           width: 40px;
           height: 40px;
@@ -168,7 +167,7 @@ label {
       }
     }
   }
-  .manageEmployee {
+  .manageDepartment {
     margin-left: 300px;
     margin-top: 120px;
     width: 100%;
@@ -193,7 +192,7 @@ label {
         }
       }
     }
-    .manageEmployee-content {
+    .manageDepartment-content {
       background-color: white;
       margin-top: 40px 0 30px 30px;
       background-color: $white;
@@ -576,13 +575,14 @@ label {
     }
   }
   footer {
+    position: relative;
+    bottom: 0;
     p {
       display: flex;
       align-items: center;
       font-size: 14px;
       color: rgb(131, 141, 151);
       gap: 5px;
-      margin: 30px 0px;
     }
   }
 }

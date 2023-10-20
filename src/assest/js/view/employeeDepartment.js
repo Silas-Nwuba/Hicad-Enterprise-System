@@ -3,6 +3,8 @@ import 'regenerator-runtime/runtime.js';
 import data from '../../../data.json';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { app } from '../modal/firebaseConfig';
+import { createEmployeeDepartment } from '../modal/departmentService';
+
 const employeeName = document.querySelector('.employee-name');
 const departmentName = document.querySelector('.department-name');
 const position = document.querySelector('.employee-position');
@@ -116,7 +118,7 @@ window.onload = function () {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   if (validateForm()) {
-    console.log('working');
+    sendEmployeeDepartmentData();
   }
 });
 const validateForm = () => {
@@ -152,3 +154,31 @@ const getInputName = (input) => {
   const text = input.querySelector('label');
   return text.textContent;
 };
+
+const sendEmployeeDepartmentData = () => {
+  const employeeName = document.querySelector('.employee-name').value;
+  const departmentName = document.querySelector('.department-name').value;
+  const position = document.querySelector('.employee-position').value;
+  const jobType = document.querySelector('.job-type').value;
+
+  const data = {
+    employeeName: employeeName,
+    departmentName: departmentName,
+    employeePosition: position,
+    jobType: jobType,
+  };
+  createEmployeeDepartment(data);
+};
+
+//logout
+const user = document.querySelector('.info');
+const logoutModal = document
+  .querySelector('.logout-modal')
+  .querySelector('.modal');
+user.addEventListener('click', () => {
+  if (logoutModal.style.display === 'block') {
+    logoutModal.style.display = 'none';
+  } else {
+    logoutModal.style.display = 'block';
+  }
+});

@@ -31,6 +31,7 @@ const showError = () => {
   }, 3000);
 };
 const showSuccess = () => {
+  notification.querySelector('.message').innerHTML = 'Successfully Registered';
   notification.style.right = '0px';
   setTimeout(() => {
     notification.style.right = '-300px';
@@ -48,7 +49,7 @@ const generateId = (start, range) => {
 export const createEmployeeDepartment = (data) => {
   displayLoader();
   const db = getDatabase(app);
-  const departmentId = `${generateId(100, 1000)}`;
+  const departmentId = `departId${generateId(100, 1000)}`;
   set(ref(db, 'department/' + departmentId), data)
     .then(() => {
       hideLoader();

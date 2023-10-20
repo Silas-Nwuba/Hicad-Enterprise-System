@@ -203,6 +203,64 @@ html {
       z-index: 10000;
       display: none;
     }
+    .logout-modal {
+      .modal {
+        display: none;
+        position: fixed;
+        top: 55%;
+        left: 87%;
+        transform: translate(-50%, -50%);
+        width: 240px;
+        z-index: 10000;
+        transition: 0.5s ease;
+      }
+      .modal-header {
+        background-color: darkblue;
+      }
+      .header-content {
+        gap: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+          line-height: 0.5;
+        }
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+        p {
+          color: white;
+          font-size: 0.8rem;
+          font-weight: 400;
+        }
+      }
+      .modal-body {
+        ul {
+          padding-left: 0px;
+        }
+        ul li {
+          font-size: 0.9rem;
+          padding: 10px 10px;
+          list-style: none;
+          margin: 10px 0px;
+          cursor: pointer;
+        }
+        ul li a {
+          text-decoration: none;
+          color: #464545;
+        }
+        ul li:hover {
+          background-color: #eeee;
+          border-radius: 4px;
+          width: 100%;
+          color: rgb(2, 2, 92);
+          font-weight: 500;
+        }
+      }
+    }
+
     // sending http request spinner
     .loader-spinner {
       position: fixed;
