@@ -138,6 +138,15 @@ html {
         font-weight: 500;
         color: #2e2e2e;
       }
+      input {
+        width: 100%;
+        padding: 10px 15px;
+        margin: 10px 0px;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid #ccc;
+        display: block;
+      }
       .bi-asterisk {
         color: red;
       }
@@ -177,7 +186,7 @@ html {
       padding: 10px 5px 2px 5px;
       z-index: inherit;
       position: fixed;
-      top: 65px;
+      top: 80px;
       right: -300px;
       transition: all 0.5s ease;
       margin-right: 30px;

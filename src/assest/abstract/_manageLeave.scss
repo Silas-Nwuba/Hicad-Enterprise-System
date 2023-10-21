@@ -259,22 +259,15 @@ label {
     tbody tr .action-button {
       display: flex;
       button {
-        max-width: 86px;
+        width: 100px;
         border-radius: 5px;
         cursor: pointer;
         border: none;
         color: white;
-        font-size: 1rem;
-        padding: 10px;
+        font-size: 0.8rem;
+        padding: 10px 15px;
         margin: 0px 3px;
         text-transform: capitalize;
-      }
-
-      .approve-btn {
-        background-color: green;
-      }
-      .decline-btn {
-        background-color: rgb(160, 3, 3);
       }
     }
     .table-footer-action {
@@ -322,5 +315,75 @@ label {
         }
       }
     }
+    .view-detail {
+      .modal {
+        display: block;
+        z-index: 20000;
+        top: 10%;
+        width: 100%;
+      }
+      .modal-header {
+        .modal-title {
+          font-size: 1.2rem;
+        }
+      }
+      form {
+        margin-top: 20px;
+        margin-left: 15px;
+        margin-right: 15px;
+        input {
+          width: 100%;
+          padding: 10px 15px;
+          margin: 10px 0px;
+          border-radius: 5px;
+          outline: none;
+          border: 1px solid #ccc;
+        }
+        input::placeholder {
+          font-size: 0.8rem;
+        }
+        select {
+          display: block;
+          width: 100%;
+          height: 45px;
+          outline: none;
+          border: 1px solid #ccc;
+          margin: 15px 0px;
+          border-radius: 2px;
+          padding: 10px 10px;
+          font-size: 0.9rem;
+          border-radius: 5px;
+          option {
+            text-transform: capitalize;
+            font-size: 0.9rem;
+          }
+        }
+        button {
+          margin-top: 20px;
+          cursor: pointer;
+        }
+        .error-message {
+          color: red;
+          font-size: 13px;
+        }
+        .success-message {
+          display: none;
+        }
+      }
+    }
+    .close {
+      font-size: 26px;
+      cursor: pointer;
+    }
   }
+}
+.overlay {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 10000;
+  display: none;
 }

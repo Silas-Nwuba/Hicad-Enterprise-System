@@ -8,6 +8,8 @@ import {editDepartmentData,deleteDepartmentData} from '../modal/departmentServic
 import { createEmployeeLeave } from '../modal/leaveSevice';
 
 const employeeName = document.querySelector('.employee');
+const appliedDate = document.querySelector('.applied-date');
+console.log(appliedDate);
 const select = document.querySelectorAll('select');
 const form = document.querySelector('form');
 
@@ -42,17 +44,25 @@ form.addEventListener('submit', (e) => {
 });
 
 const validateForm = () => {
-  let selectError = true;
+  let error = true;
   select.forEach((input) => {
     if (input.value.trim() === '') {
       errorMessage(input, 'is required');
-      selectError = false;
+      error = false;
     } else {
       successMessage(input);
-      selectError = true;
+      error = true;
     }
   });
-  if (selectError === true) {
+  if (appliedDate.value === '') {
+    errorMessage(appliedDate, 'is required');
+    error = false;
+  } else {
+    successMessage(appliedDate);
+    error = true;
+  }
+
+  if (error === true) {
     return true;
   } else {
     return false;
@@ -80,13 +90,13 @@ const sendEmployeeLeaveData = (form) => {
   const employeeName = form.querySelector('.employee').value;
   const position = form.querySelector('.position').value;
   const leaveType = form.querySelector('.leave-type').value;
-  const requestLeave = form.querySelector('.leave-request').value;
+  const appliedDate = form.querySelector('.applied-date').value;
 
   const data = {
     employeeName: employeeName,
     position: position,
     leaveType: leaveType,
-    requestLeave: requestLeave,
+    appliedDate: appliedDate,
     status: 'Pending',
   };
   createEmployeeLeave(data);

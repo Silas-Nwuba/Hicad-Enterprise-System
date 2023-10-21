@@ -46,17 +46,17 @@ const generateId = (start, range) => {
   return id;
 };
 
-export const createEmployeeLeave = (data) => {
-  displayLoader();
-  const db = getDatabase(app);
-  const employeeLeaveId = `LeaveId${generateId(100, 1000)}`;
-  set(ref(db, 'leave/' + employeeLeaveId), data)
-    .then(() => {
-      hideLoader();
-      showSuccess();
-    })
-    .catch(() => {
-      hideLoader();
-      showError();
-    });
-};
+// export const createEmployeeLeave = (data) => {
+//   displayLoader();
+//   const db = getDatabase(app);
+//   const  = `ApproveId${generateId(100, 1000)}`;
+//   set(ref(db, 'ApproveLeave/' + employeeLeaveId), data)
+//     .then(() => {
+//       hideLoader();
+//       showSuccess();
+//     })
+//     .catch(() => {
+//       hideLoader();
+//       showError();
+//     });
+// };
