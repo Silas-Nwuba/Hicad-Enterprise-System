@@ -55,7 +55,6 @@ window.onload = function () {
       departmentName.disabled = false;
       position.disabled = true;
       jobType.disabled = true;
-
       departmentName.length = 1;
       position.length = 1;
       jobType.length = 1;
@@ -68,7 +67,6 @@ window.onload = function () {
       departmentName.disabled = true;
       position.disabled = true;
       jobType.disabled = true;
-
       departmentName.length = 1;
       position.length = 1;
       jobType.length = 1;
