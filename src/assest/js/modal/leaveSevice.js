@@ -31,7 +31,7 @@ const showError = () => {
   }, 3000);
 };
 const showSuccess = () => {
-  notification.querySelector('.message').innerHTML = 'Successfuly Applied';
+  notification.querySelector('.message').innerHTML = 'Successfully Applied';
   notification.style.right = '0px';
   setTimeout(() => {
     notification.style.right = '-300px';

@@ -2,8 +2,8 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime.js';
 import DataTable from 'datatables.net-bs5';
 import { app } from '../modal/firebaseConfig';
-import { getDatabase, ref, onValue } from 'firebase/database';
-import { deleteEmployeeData, editEmployeeData } from '../modal/EmployeeService';
+import { getDatabase, ref, onValue, get } from 'firebase/database';
+import { sendleaveHistory } from '../modal/leaveHistory';
 
 const tableElement = document.querySelector('#myTable');
 const viewDetailModal = document.querySelector('.view-detail');
@@ -82,7 +82,7 @@ const approveLeave = () => {
 };
 approveLeave();
 const sendApproveLeave = (id) => {
-  const html = ` <div class="modal" data-id = ${id}>
+  const html = ` <div class="modal"data-id =${id}>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,15 +94,15 @@ const sendApproveLeave = (id) => {
       <div class="modal-body">
         <form action="" autocomplete="off">
           <div class="col">
-            <select>
+            <select class="actionOption">
               <option value="" selected>Choose..</option>
-              <option value="Accept">Accept</option>
+              <option value="Approve">Approve</option>
               <option value="Decline">Decline</option>
             </select>
             <small></small>
           </div>
           <div class="col">
-            <input type="text" placeholder="Descripton" />
+            <input type="text" placeholder="Descripton" class="description"/>
             <small></small>
           </div>
           <button type="button" class="btn btn-danger">Close</button>
@@ -115,12 +115,98 @@ const sendApproveLeave = (id) => {
   viewDetailModal.insertAdjacentHTML('beforeend', html);
   overlay.style.display = 'block';
   viewDetailModal.querySelector('.close').addEventListener('click', closeModal);
-  viewDetailModal
-    .querySelector('.btn-danger')
-    .addEventListener('click', closeModal);
+  //prettier-ignore
+  viewDetailModal.querySelector('.btn-danger').addEventListener('click', closeModal);
+  //prettier-ignore
+  viewDetailModal.querySelector('form').addEventListener('submit', applyLeave);
 };
 
-//close edit modal
+const applyLeave = (e) => {
+  e.preventDefault();
+  const targetElement = e.target;
+  validationForm(targetElement);
+  if (validationForm(targetElement)) {
+    sendLeaveData(targetElement);
+  }
+};
+const validationForm = (formElement) => {
+  const actionOption = formElement.querySelector('.actionOption');
+  const description = formElement.querySelector('.description');
+  let error = true;
+
+  if (description.value.trim() === '') {
+    errorMessage(description, 'is required');
+    error = false;
+  } else {
+    successMessage(description);
+    error = true;
+  }
+  if (actionOption.value.trim() === '') {
+    errorMessage(actionOption, 'is required');
+    error = false;
+  } else {
+    successMessage(actionOption);
+    error = true;
+  }
+
+  if (error === true) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const errorMessage = (input, message) => {
+  const inputParent = input.parentElement;
+  const small = inputParent.querySelector('small');
+  small.classList.add('error-message');
+  small.textContent = ` Field ${message}`;
+};
+const successMessage = (input) => {
+  const inputParent = input.parentElement;
+  const small = inputParent.querySelector('small');
+  small.classList.remove('error-message');
+  small.textContent = '';
+};
+
+const sendLeaveData = (formElement) => {
+  const id = document.querySelector('.modal').dataset.id;
+  const leaveOption = formElement.querySelector('.actionOption').value;
+  const desc = formElement.querySelector('.description').value;
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const approveDate = `${day}-${month}-${year}`;
+
+  const db = getDatabase(app);
+  get(ref(db, 'leave/', id))
+    .then((snapshot) => {
+      snapshot.forEach((childSnaphot) => {
+        const leaveId = childSnaphot.key;
+        if (id === leaveId) {
+          const data = childSnaphot.val();
+          const { employeeName, appliedDate, leaveType, position } = data;
+          const leaveData = {
+            employeeId: id,
+            employeeName: employeeName,
+            appliedDate: appliedDate,
+            leaveType: leaveType,
+            position: position,
+            leaveOption: leaveOption,
+            description: desc,
+            approveDate: approveDate,
+          };
+          sendleaveHistory(leaveData);
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+//close
 const closeModal = () => {
   viewDetailModal.querySelector('.modal').remove();
   overlay.style.display = 'none';
@@ -129,7 +215,6 @@ const closeModal = () => {
 };
 
 ///logout
-
 const user = document.querySelector('.info');
 const logoutModal = document
   .querySelector('.logout-modal')

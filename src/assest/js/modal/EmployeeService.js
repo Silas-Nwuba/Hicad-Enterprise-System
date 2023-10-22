@@ -76,7 +76,6 @@ export function editEmployeeData(id, data) {
       }, 1000);
     });
 }
-
 export function deleteEmployeeData(id) {
   displayLoader();
   const db = getDatabase(app);

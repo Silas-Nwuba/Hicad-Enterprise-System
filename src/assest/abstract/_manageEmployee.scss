@@ -576,6 +576,8 @@ label {
     }
   }
   footer {
+    position: absolute;
+    bottom: 0;
     p {
       display: flex;
       align-items: center;
