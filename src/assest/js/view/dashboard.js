@@ -6,44 +6,51 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 const totalEmployee = document.querySelector('.total-employee');
 const totalDepartment = document.querySelector('.total-department');
 const totalLeaveApplied = document.querySelector('.total-leave-applied');
-const totalLeaveApprove = document.querySelector('.total-leave-approved');
+const totalLeaveApprove = document.querySelector('.total-leave-approve');
+const totalLeaveDecline = document.querySelector('.total-leave-decline');
+totalEmployee.innerHTML = 0;
+totalDepartment.innerHTML = 0;
+totalLeaveApplied.innerHTML = 0;
+totalLeaveApprove.innerHTML = 0;
+totalLeaveDecline.innerHTML = 0;
 
-let employeeTotal;
-let departmentTotal;
-let leaveApplied;
-let leaveApprove;
 const db = getDatabase(app);
 const getEmployee = ref(db, 'employee');
 onValue(getEmployee, (snapshot) => {
-  snapshot.forEach((childSnaphot) => {
-    employeeTotal = childSnaphot.key.length;
-  });
-  totalEmployee.innerHTML = employeeTotal;
+  const employeeTotal = snapshot.size;
+  if (+employeeTotal >= 1 && employeeTotal < 10)
+    totalEmployee.innerHTML = `0${employeeTotal}`;
 });
 
 const getDepartment = ref(db, 'department');
 onValue(getDepartment, (snapshot) => {
-  snapshot.forEach((childSnaphot) => {
-    departmentTotal = childSnaphot.key.length;
-  });
-  totalDepartment.innerHTML = departmentTotal;
+  const departmentTotal = snapshot.size;
+  if (+departmentTotal >= 1 && departmentTotal < 10)
+    totalDepartment.innerHTML = `0${departmentTotal}`;
 });
 
 const getLeaveApplied = ref(db, 'leave');
 onValue(getLeaveApplied, (snapshot) => {
-  snapshot.forEach((childSnaphot) => {
-    leaveApplied = childSnaphot.key.length;
-  });
-  totalDepartment.innerHTML = leaveApplied;
+  const leaveApplied = snapshot.size;
+  if (+leaveApplied >= 1 && leaveApplied < 10)
+    totalLeaveApplied.innerHTML = `0${leaveApplied}`;
 });
 
 const getLeaveApprove = ref(db, 'leaveHistory');
 onValue(getLeaveApprove, (snapshot) => {
+  const approveArr = [];
+  const declineArr = [];
   snapshot.forEach((childSnaphot) => {
     const { leaveOption } = childSnaphot.val();
     if (leaveOption === 'Approve') {
-      leaveApprove = childSnaphot.key.length;
-      totalDepartment.innerHTML = leaveApprove;
+      approveArr.push(childSnaphot);
+      const item = approveArr.length;
+      if (+item >= 1 && item < 10) totalLeaveApprove.innerHTML = `0${item}`;
+    }
+    if (leaveOption === 'Decline') {
+      declineArr.push(childSnaphot);
+      const item = declineArr.length;
+      if (+item >= 1 && item < 10) totalLeaveDecline.innerHTML = `0${item}`;
     }
   });
 });

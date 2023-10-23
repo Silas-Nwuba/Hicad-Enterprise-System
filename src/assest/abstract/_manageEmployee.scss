@@ -94,27 +94,39 @@ label {
     }
     ul li {
       list-style: none;
-      color: #cccc;
       font-size: 0.8rem;
-      padding: 20px 15px;
+      padding: 10px 15px;
       cursor: pointer;
-      transition: 0.5s ease;
     }
     li a {
       text-decoration: none;
-      color: #cccc;
+      color: rgb(255, 255, 255);
       font-size: 0.8rem;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      display: inline-block;
     }
-    ul li:nth-child(1) {
-      border-left: 3px solid white;
-      background-color: #eee;
-      color: #7d7e80;
+    .active {
+      text-decoration: none;
+      background-color: #eeee;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      display: inline-block;
+      border-radius: 5px;
     }
+
     svg {
       margin: 0 10px 0 20px;
       text-align: center;
       line-height: 30px;
     }
+  }
+  ul li a:hover {
+    background-color: #eeee;
+    transition: 0.5s ease;
+    border-radius: 5px;
   }
 }
 
@@ -576,15 +588,15 @@ label {
     }
   }
   footer {
-    position: absolute;
-    bottom: 0;
+    margin: 80px 0px 0px 0px;
     p {
       display: flex;
       align-items: center;
       font-size: 14px;
       color: rgb(131, 141, 151);
       gap: 5px;
-      margin: 30px 0px;
+      position: relative;
+      bottom: 0;
     }
   }
 }
